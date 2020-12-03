@@ -10,7 +10,6 @@ target_include_directories(YAGE-ToolManager
 target_sources(YAGE-ToolManager
   PUBLIC
     ${INCROOT}/ToolManager.hpp
-    ${INCROOT}/ToolSelector.hpp
     ${INCROOT}/Tool.hpp
   PRIVATE
     ToolManager.cpp

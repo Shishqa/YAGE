@@ -9,10 +9,12 @@ target_include_directories(YAGE-Tools
 
 target_sources(YAGE-Tools
   PUBLIC
+    ${INCROOT}/Tools.hpp
+  PRIVATE
     ${INCROOT}/Pencil.hpp
     ${INCROOT}/Eraser.hpp
-  PRIVATE
-  Pencil.cpp
+    ${INCROOT}/Rectangle.hpp
+    Pencil.cpp
   )
 
 target_link_libraries(YAGE-Tools

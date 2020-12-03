@@ -3,11 +3,10 @@
 #define SHISHGL_CONVERT_HPP
 /*============================================================================*/
 #include "Color.hpp"
-using namespace ShishGL;
 /*============================================================================*/
 namespace YAGE::ColorUtils::Convert {
 
-    Color HSVtoRGB(double H, double S, double V);
+    Sh::Color HSVtoRGB(double H, double S, double V);
 
 }
 /*============================================================================*/

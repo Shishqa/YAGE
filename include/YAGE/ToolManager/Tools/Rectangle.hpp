@@ -1,0 +1,60 @@
+/*============================================================================*/
+#ifndef YAGE_RECTANGLE_HPP
+#define YAGE_RECTANGLE_HPP
+/*============================================================================*/
+#include "ImageManager.hpp"
+#include "Tool.hpp"
+#include "Stroke.hpp"
+/*============================================================================*/
+namespace YAGE {
+
+    class Rectangle : public Tool {
+    public:
+
+        Rectangle() : apply_pos({})
+        { }
+
+        void startApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
+            apply_pos = pos;
+            ImageManager::addLayer();
+        }
+
+        void update(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
+            img.fill(Sh::Color::NONE);
+
+            Sh::Vector2<int64_t> from = {std::min(pos.x, apply_pos.x),
+                                         std::min(pos.y, apply_pos.y)};
+
+            Sh::Vector2<int64_t> to   = {std::max(pos.x, apply_pos.x),
+                                         std::max(pos.y, apply_pos.y)};
+
+            for (int64_t x = from.x; x < to.x; ++x) {
+                for (int64_t y = from.y; y < to.y; ++y) {
+
+                    img.setPixel(
+                            Sh::Vector2<size_t>{static_cast<size_t>(x), static_cast<size_t>(y)},
+                            property<Stroke>().activeColor());
+
+                }
+            }
+        }
+
+        void stopApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
+        }
+
+        [[nodiscard]]
+        std::string_view getIcon() const override {
+            return "./textures/tools/040-artboard.png";
+        }
+
+    protected:
+
+        Sh::Vector2<int64_t> apply_pos;
+
+    };
+
+
+}
+/*============================================================================*/
+#endif //YAGE_RECTANGLE_HPP
+/*============================================================================*/

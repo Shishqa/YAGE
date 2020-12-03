@@ -5,68 +5,76 @@
 #include <string_view>
 #include <vector>
 #include <cassert>
+#include <list>
 
 #include "Vector2.hpp"
 #include "Color.hpp"
-#include "ColorCollection.hpp"
 #include "Image.hpp"
-using namespace ShishGL;
 /*============================================================================*/
 namespace YAGE {
 
     class ImageManager {
     public:
 
-        /*
-         * TODO:
-         * 1) add layers
-         * 2) active layer
-         * 3) layer selector
-         *
-         */
+        using LayerPool = std::list<Sh::Image>;
 
         ImageManager() = delete;
 
         static void loadImage(const std::string_view& filename) {
             delete ImageContext();
-            ImageContext() = RENDERER().loadContextFromImage(filename);
+            ImageContext() = Sh::PLATFORM().loadContextFromImage(filename);
         }
 
         static void saveImage(const std::string_view& filename) {
 
-            Image result(Layers()[0].size(), COLOR::NONE);
+            Sh::Image result(Layers().begin()->size(), Sh::Color::NONE);
             displayTo(result);
 
             result.paste(ImageContext());
-            RENDERER().saveContextAsImage(ImageContext(), filename);
+            Sh::PLATFORM().saveContextAsImage(ImageContext(), filename);
         }
 
-        static Image& getActiveLayer() {
-            return Layers()[ActiveLayer()];
+        static void setActiveLayer(size_t layer) {
+            ActiveLayer() = Layers().begin();
+            std::advance(ActiveLayer(), layer);
+        }
+
+        static const LayerPool& getLayers() {
+            return Layers();
+        }
+
+        static Sh::Image& getActiveLayer() {
+            return *ActiveLayer();
         };
 
-        static void createImage(const Vector2<size_t>& size) {
+        static void createImage(const Sh::Vector2<size_t>& size) {
 
             delete ImageContext();
-            ImageContext() = RENDERER().createContext(size, COLOR::WHITE);
+            ImageContext() = Sh::PLATFORM().createContext(size, Sh::Color::WHITE);
 
-            Layers().emplace_back(size, COLOR::WHITE);
-            Layers().emplace_back(size, COLOR::NONE);
-            ActiveLayer() = 1;
+            Layers().emplace_back(size, Sh::Color::WHITE);
+            Layers().emplace_back(size, Sh::Color::NONE);
+            Layers().emplace_back(size, Sh::Color::NONE);
+            Layers().emplace_back(size, Sh::Color::NONE);
+            ActiveLayer() = Layers().end();
+            ActiveLayer()--;
         }
 
-        static void displayTo(Image& result) {
+        static void displayTo(Sh::Image& result) {
             for (auto& layer : Layers()) {
                 result.blend(layer);
             }
         }
 
+        static void addLayer() {
+            Layers().emplace_back(Layers().begin()->size(), Sh::Color::NONE);
+        }
+
     private:
 
-        using LayerPool = std::vector<Image>;
 
-        static size_t& ActiveLayer() {
-            static size_t ACTIVTE_LAYER = 0;
+        static LayerPool::iterator& ActiveLayer() {
+            static auto ACTIVTE_LAYER = Layers().begin();
             return ACTIVTE_LAYER;
         }
 
@@ -75,8 +83,8 @@ namespace YAGE {
             return LAYERS;
         }
 
-        static IPlatform::IContext*& ImageContext() {
-            static IPlatform::IContext* CONTEXT;
+        static Sh::IPlatform::IContext*& ImageContext() {
+            static Sh::IPlatform::IContext* CONTEXT;
             return CONTEXT;
         }
 

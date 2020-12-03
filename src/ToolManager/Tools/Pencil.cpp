@@ -4,8 +4,8 @@
 using namespace YAGE;
 /*============================================================================*/
 
-void Pencil::draw(Image& img, const Vector2<int64_t>& pos,
-                  size_t thickness, const Color& color) {
+void Pencil::draw(Sh::Image& img, const Sh::Vector2<int64_t>& pos,
+                  size_t thickness, const Sh::Color& color) {
 
     thickness /= 2;
 

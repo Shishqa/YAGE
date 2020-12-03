@@ -1,16 +1,15 @@
 /*============================================================================*/
 #include "Stroke.hpp"
-#include "ColorCollection.hpp"
 #include "WindowManager.hpp"
 /*============================================================================*/
 using namespace YAGE;
 /*============================================================================*/
 
-const Color& Stroke::activeColor() const {
+const Sh::Color& Stroke::activeColor() const {
     return color;
 }
 
-void Stroke::setColor(const Color& new_color) {
+void Stroke::setColor(const Sh::Color& new_color) {
     color = new_color;
 }
 

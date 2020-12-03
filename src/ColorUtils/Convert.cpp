@@ -12,7 +12,7 @@ double HSVhelper(double n, double H, double S, double V) {
     return (V - V * S * std::max(0.0, std::min({k, 4.0 - k, 1.0})));
 }
 
-Color YAGE::ColorUtils::Convert::HSVtoRGB(double H, double S, double V) {
+Sh::Color YAGE::ColorUtils::Convert::HSVtoRGB(double H, double S, double V) {
 
     if (std::isnan(H)) {
         return {0, 0, 0, 255};
@@ -22,8 +22,6 @@ Color YAGE::ColorUtils::Convert::HSVtoRGB(double H, double S, double V) {
              static_cast<uint8_t>(HSVhelper(3, H, S, V) * 255),
              static_cast<uint8_t>(HSVhelper(1, H, S, V) * 255),
              255 };
-
-
 }
 
 /*============================================================================*/

@@ -1,66 +1,140 @@
 /*============================================================================*/
 #include "ColorPicker.hpp"
 #include "Convert.hpp"
+#include "UISlider.hpp"
+#include "UISlider2D.hpp"
+#include "ColorFill.hpp"
+#include "ToolManager.hpp"
+#include "Stroke.hpp"
+#include "Bordered.hpp"
 /*============================================================================*/
 using namespace YAGE;
 /*============================================================================*/
 
-double ColorManager::H = 0.8;
-double ColorManager::S = 1.0;
-double ColorManager::V = 1.0;
+ColorManager::Color ColorManager::primary   = {0.0, 0.0, 0.0};
+ColorManager::Color ColorManager::secondary = {0.0, 0.0, 1.0};
 
 /*============================================================================*/
 
-YAGE::HuePicker::HuePicker(const Viewport& frame)
-        : UIWindow(frame)
-        , palette(static_cast<Vector2<size_t>>(frame.size), COLOR::NONE) {
+class HueSelector {
+public:
 
-    context = RENDERER().createContext(palette.size(), COLOR::NONE);
+    explicit HueSelector(ColorManager::Color* selectable)
+            : color(selectable)
+            { }
 
-    for (int64_t x = 0; x < static_cast<int64_t>(palette.size().x); ++x) {
+    void set(const double& value) {
 
-        double h = static_cast<double>(x) / static_cast<double>(palette.size().x);
+        color->h = value;
 
-        for (int64_t y = 0; y < static_cast<int64_t>(palette.size().y); ++y) {
+        ToolManager::activeTool().property<Stroke>().setColor(
+                ColorUtils::Convert::HSVtoRGB(color->h,
+                                              color->s,
+                                              color->v));
+    }
 
-            palette.setPixel({static_cast<size_t>(x), static_cast<size_t>(y)},
-                             ColorUtils::Convert::HSVtoRGB(h, ColorManager::S, ColorManager::V)
+private:
+
+    ColorManager::Color* color;
+};
+
+class SVSelector {
+public:
+
+    explicit SVSelector(ColorManager::Color* selectable)
+            : color(selectable)
+            { }
+
+    void set(const Sh::Vector2<double>& value) {
+
+        color->s = value.x;
+        color->v = 1 - value.y;
+
+        ToolManager::activeTool().property<Stroke>().setColor(
+                ColorUtils::Convert::HSVtoRGB(color->h,
+                                              color->s,
+                                              color->v));
+    }
+
+private:
+
+    ColorManager::Color* color;
+
+};
+
+/*============================================================================*/
+
+YAGE::HuePicker::HuePicker(const Sh::Frame& frame, ColorManager::Color* color)
+        : Sh::UICanvas(frame, Sh::Color::BLACK) {
+
+    for (int64_t x = 0; x < static_cast<int64_t>(canvas.size().x); ++x) {
+
+        double h = static_cast<double>(x) / static_cast<double>(canvas.size().x);
+
+        for (int64_t y = 0; y < static_cast<int64_t>(canvas.size().y); ++y) {
+            canvas.setPixel({static_cast<size_t>(x), static_cast<size_t>(y)},
+                             ColorUtils::Convert::HSVtoRGB(h, 1.0, 1.0)
                              );
         }
     }
-}
 
-void HuePicker::onRender() {
-    palette.paste(context);
-    RENDERER().displayContext(context, getPos());
+    attach<Sh::UISlider<HueSelector>>(
+            Sh::Frame{ {0, 0}, {10, frame.size.y} },
+            Sh::Segment2<double>{ {0, 0}, {frame.size.x - 10, 0} },
+            color
+            )
+            ->applyStyle<Sh::UIWindow::NORMAL>(
+                    Sh::Bordered{2, Sh::Color::BLACK},
+                    Sh::ColorFill{Sh::Color::WHITE}
+                    );
 }
 
 /*============================================================================*/
 
-SVPicker::SVPicker(const Viewport& frame)
-        : UIWindow(frame)
-        , palette(static_cast<Vector2<size_t>>(frame.size), COLOR::NONE) {
+SVPicker::SVPicker(const Sh::Frame& frame, ColorManager::Color* c)
+        : Sh::UICanvas(frame, Sh::Color::WHITE)
+        , last_hue(c->h)
+        , color(c) {
 
-    context = RENDERER().createContext(palette.size(), COLOR::NONE);
+    attach<Sh::UISlider2D<SVSelector>>(
+            Sh::Frame{{0, 0}, {10, 10}},
+            Sh::Frame{{0, 0}, frame.size},
+            color
+            )
+            ->applyStyle<Sh::UIWindow::NORMAL>(
+                    Sh::Bordered{2, Sh::Color::BLACK},
+                    Sh::ColorFill{Sh::Color::WHITE}
+                    );
 
-    for (int64_t x = 0; x < static_cast<int64_t>(palette.size().x); ++x) {
-
-        double S = static_cast<double>(x) / static_cast<double>(palette.size().x);
-
-        for (int64_t y = 0; y < static_cast<int64_t>(palette.size().y); ++y) {
-
-            double V = 1 - static_cast<double>(y) / static_cast<double>(palette.size().y);
-
-            palette.setPixel({static_cast<size_t>(x), static_cast<size_t>(y)},
-                             ColorUtils::Convert::HSVtoRGB(ColorManager::H, S, V)
-            );
-        }
-    }
+    update();
 }
 
 void SVPicker::onRender() {
-    palette.paste(context);
-    RENDERER().displayContext(context, getPos());
+
+    if (color->h != last_hue) {
+        last_hue = color->h;
+        update();
+    }
+
+    Sh::UICanvas::onRender();
+}
+
+void SVPicker::update() {
+
+    for (int64_t x = 0; x < static_cast<int64_t>(canvas.size().x); ++x) {
+
+        double S = static_cast<double>(x) / static_cast<double>(canvas.size().x);
+
+        for (int64_t y = 0; y < static_cast<int64_t>(canvas.size().y); ++y) {
+
+            double V = 1 - static_cast<double>(y) / static_cast<double>(canvas.size().y);
+
+            canvas.setPixel({static_cast<size_t>(x), static_cast<size_t>(y)},
+                            ColorUtils::Convert::HSVtoRGB(color->h, S, V)
+            );
+        }
+    }
+
 }
 
 /*============================================================================*/

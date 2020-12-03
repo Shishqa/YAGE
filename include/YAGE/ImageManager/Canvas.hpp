@@ -8,16 +8,15 @@
 #include "ToolManager.hpp"
 #include "Pencil.hpp"
 #include "UICanvas.hpp"
-using namespace ShishGL;
 /*============================================================================*/
 namespace YAGE {
 
-    class CanvasBehaviour;
+    class CanvasBehavior;
 
-    class Canvas : public UICanvas {
+    class Canvas : public Sh::UICanvas {
     public:
 
-        explicit Canvas(const Viewport& viewport);
+        explicit Canvas(const Sh::Frame& viewport);
 
     protected:
 
@@ -31,14 +30,14 @@ namespace YAGE {
 
     /*------------------------------------------------------------------------*/
 
-    class CanvasBehaviour : public Clickable {
+    class CanvasBehavior : public Sh::Clickable {
     public:
 
-        explicit CanvasBehaviour(UIWindow* target);
+        explicit CanvasBehavior(Sh::UIWindow* target);
 
-        bool onMouseButton(MouseButtonEvent& event) override;
+        bool onMouseButton(Sh::MouseButtonEvent& event) override;
 
-        bool onMouseMove(MouseEvent& event) override;
+        bool onMouseMove(Sh::MouseEvent& event) override;
 
     private:
 

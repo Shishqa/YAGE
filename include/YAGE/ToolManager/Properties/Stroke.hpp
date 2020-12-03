@@ -5,9 +5,7 @@
 #include <cstddef>
 
 #include "Color.hpp"
-#include "ColorCollection.hpp"
 #include "UIWindow.hpp"
-using namespace ShishGL;
 /*============================================================================*/
 namespace YAGE {
 
@@ -15,17 +13,13 @@ namespace YAGE {
     public:
 
         /*--------------------------------------------------------------------*/
-        static constexpr Color DEFAULT_COLOR = COLOR::GREEN;
-
         [[nodiscard]]
-        const Color& activeColor() const;
+        const Sh::Color& activeColor() const;
 
-        void setColor(const Color& new_color);
+        void setColor(const Sh::Color& new_color);
         /*--------------------------------------------------------------------*/
 
         /*--------------------------------------------------------------------*/
-        static constexpr size_t DEFAULT_THICKNESS = 5;
-
         [[nodiscard]]
         const size_t& activeThickness() const;
 
@@ -34,9 +28,9 @@ namespace YAGE {
 
     private:
 
-        Color color = DEFAULT_COLOR;
+        Sh::Color color = Sh::Color::GREEN;
 
-        size_t thickness = DEFAULT_THICKNESS;
+        size_t thickness = 15;
 
     };
 

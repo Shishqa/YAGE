@@ -6,16 +6,16 @@
 using namespace YAGE;
 /*============================================================================*/
 
-Canvas::Canvas(const Viewport& viewport)
-        : UICanvas(viewport) {
-    addBehavior<CanvasBehaviour>();
+Canvas::Canvas(const Sh::Frame& frame)
+        : UICanvas(frame) {
+    addBehavior<CanvasBehavior>();
 }
 
 /*----------------------------------------------------------------------------*/
 
 void Canvas::onRender() {
 
-    canvas.fill(COLOR::WHITE);
+    //canvas.fill(Sh::Color::WHITE);
     ImageManager::displayTo(canvas);
 
     UICanvas::onRender();
@@ -23,34 +23,36 @@ void Canvas::onRender() {
 
 /*============================================================================*/
 
-CanvasBehaviour::CanvasBehaviour(UIWindow* target)
+CanvasBehavior::CanvasBehavior(Sh::UIWindow* target)
         : Clickable(target)
         , applying_tool(false) {
-    SubscriptionManager::subscribe(EventSystem::SystemEvents, this,
-                                       MOUSE_MOVE | MOUSE_BUTTON);
     ToolManager::set<Pencil>();
 }
 
 /*----------------------------------------------------------------------------*/
 
-bool CanvasBehaviour::onMouseButton(MouseButtonEvent& event) {
+bool CanvasBehavior::onMouseButton(Sh::MouseButtonEvent& event) {
 
     if (!Clickable::onMouseButton(event)) {
         return false;
     }
 
-    if (event.state() == Mouse::DOWN &&
-        event.button() == Mouse::LEFT) {
+    if (event.state() == Sh::Mouse::DOWN &&
+        event.button() == Sh::Mouse::LEFT) {
 
         applying_tool = true;
-        ToolManager::activeTool().startApplying(ImageManager::getActiveLayer(),
-                                                static_cast<Vector2<int64_t>>(event.where() - target<Window>()->getPos()));
+        ToolManager::activeTool().startApplying(
+                ImageManager::getActiveLayer(),
+                static_cast<Sh::Vector2<int64_t>>(event.where() - target<Sh::Window>()->getPos())
+                );
 
-    } else if (event.state() == Mouse::UP &&
-               event.button() == Mouse::LEFT) {
+    } else if (event.state() == Sh::Mouse::UP &&
+               event.button() == Sh::Mouse::LEFT) {
         applying_tool = false;
-        ToolManager::activeTool().stopApplying(ImageManager::getActiveLayer(),
-                                               static_cast<Vector2<int64_t>>(event.where() - target<Window>()->getPos()));
+        ToolManager::activeTool().stopApplying(
+                ImageManager::getActiveLayer(),
+                static_cast<Sh::Vector2<int64_t>>(event.where() - target<Sh::Window>()->getPos())
+                );
     }
 
     return true;
@@ -58,10 +60,12 @@ bool CanvasBehaviour::onMouseButton(MouseButtonEvent& event) {
 
 /*----------------------------------------------------------------------------*/
 
-bool CanvasBehaviour::onMouseMove(MouseEvent& event) {
+bool CanvasBehavior::onMouseMove(Sh::MouseEvent& event) {
      if (applying_tool) {
-         ToolManager::activeTool().update(ImageManager::getActiveLayer(),
-                                          static_cast<Vector2<int64_t>>(event.where() - target<Window>()->getPos()));
+         ToolManager::activeTool().update(
+                 ImageManager::getActiveLayer(),
+                 static_cast<Sh::Vector2<int64_t>>(event.where() - target<Sh::Window>()->getPos())
+                 );
          return true;
      }
 

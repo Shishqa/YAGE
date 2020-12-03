@@ -9,7 +9,10 @@ target_include_directories(YAGE-Panels
 
 target_sources(YAGE-Panels
   PUBLIC
+    ${INCROOT}/MainPanels.hpp
+    ${INCROOT}/ToolList.hpp
     ${INCROOT}/ColorPicker.hpp
+    ${INCROOT}/LayerSelector.hpp
   PRIVATE
     ColorPicker.cpp
   )

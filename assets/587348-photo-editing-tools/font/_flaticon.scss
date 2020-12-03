@@ -1,0 +1,119 @@
+    /*
+    Flaticon icon font: Flaticon
+    Creation date: 06/10/2017 08:15
+    */
+
+    @font-face {
+  font-family: "Flaticon";
+  src: url("Flaticon.eot");
+  src: url("Flaticon.eot?#iefix") format("embedded-opentype"),
+       url("Flaticon.woff") format("woff"),
+       url("Flaticon.ttf") format("truetype"),
+       url("Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("Flaticon.svg#Flaticon") format("svg");
+  }
+}
+
+    .fi:before{
+        display: inline-block;
+  font-family: "Flaticon";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+    }
+
+    .flaticon-001-saturation:before { content: "\f100"; }
+.flaticon-002-exposure:before { content: "\f101"; }
+.flaticon-003-adjustment:before { content: "\f102"; }
+.flaticon-004-burn:before { content: "\f103"; }
+.flaticon-005-hand:before { content: "\f104"; }
+.flaticon-006-red-eye:before { content: "\f105"; }
+.flaticon-007-fix:before { content: "\f106"; }
+.flaticon-008-flip:before { content: "\f107"; }
+.flaticon-009-thermometer:before { content: "\f108"; }
+.flaticon-010-paint-bucket:before { content: "\f109"; }
+.flaticon-011-pencil:before { content: "\f10a"; }
+.flaticon-012-paint-brush-1:before { content: "\f10b"; }
+.flaticon-013-cursor-1:before { content: "\f10c"; }
+.flaticon-014-patch:before { content: "\f10d"; }
+.flaticon-015-file:before { content: "\f10e"; }
+.flaticon-016-ruler:before { content: "\f10f"; }
+.flaticon-017-dropper:before { content: "\f110"; }
+.flaticon-018-mode:before { content: "\f111"; }
+.flaticon-019-eraser:before { content: "\f112"; }
+.flaticon-020-drop:before { content: "\f113"; }
+.flaticon-021-pen:before { content: "\f114"; }
+.flaticon-022-text:before { content: "\f115"; }
+.flaticon-023-foreground:before { content: "\f116"; }
+.flaticon-024-eyedropper:before { content: "\f117"; }
+.flaticon-025-zoom:before { content: "\f118"; }
+.flaticon-026-stamp:before { content: "\f119"; }
+.flaticon-027-band-aid:before { content: "\f11a"; }
+.flaticon-028-slice:before { content: "\f11b"; }
+.flaticon-029-magic-wand:before { content: "\f11c"; }
+.flaticon-030-paint-brush:before { content: "\f11d"; }
+.flaticon-031-cursor:before { content: "\f11e"; }
+.flaticon-032-finger:before { content: "\f11f"; }
+.flaticon-033-rgb:before { content: "\f120"; }
+.flaticon-034-grid:before { content: "\f121"; }
+.flaticon-035-levels:before { content: "\f122"; }
+.flaticon-036-brightness:before { content: "\f123"; }
+.flaticon-037-contrast:before { content: "\f124"; }
+.flaticon-038-delete:before { content: "\f125"; }
+.flaticon-039-crop:before { content: "\f126"; }
+.flaticon-040-artboard:before { content: "\f127"; }
+    
+    $font-Flaticon-001-saturation: "\f100";
+    $font-Flaticon-002-exposure: "\f101";
+    $font-Flaticon-003-adjustment: "\f102";
+    $font-Flaticon-004-burn: "\f103";
+    $font-Flaticon-005-hand: "\f104";
+    $font-Flaticon-006-red-eye: "\f105";
+    $font-Flaticon-007-fix: "\f106";
+    $font-Flaticon-008-flip: "\f107";
+    $font-Flaticon-009-thermometer: "\f108";
+    $font-Flaticon-010-paint-bucket: "\f109";
+    $font-Flaticon-011-pencil: "\f10a";
+    $font-Flaticon-012-paint-brush-1: "\f10b";
+    $font-Flaticon-013-cursor-1: "\f10c";
+    $font-Flaticon-014-patch: "\f10d";
+    $font-Flaticon-015-file: "\f10e";
+    $font-Flaticon-016-ruler: "\f10f";
+    $font-Flaticon-017-dropper: "\f110";
+    $font-Flaticon-018-mode: "\f111";
+    $font-Flaticon-019-eraser: "\f112";
+    $font-Flaticon-020-drop: "\f113";
+    $font-Flaticon-021-pen: "\f114";
+    $font-Flaticon-022-text: "\f115";
+    $font-Flaticon-023-foreground: "\f116";
+    $font-Flaticon-024-eyedropper: "\f117";
+    $font-Flaticon-025-zoom: "\f118";
+    $font-Flaticon-026-stamp: "\f119";
+    $font-Flaticon-027-band-aid: "\f11a";
+    $font-Flaticon-028-slice: "\f11b";
+    $font-Flaticon-029-magic-wand: "\f11c";
+    $font-Flaticon-030-paint-brush: "\f11d";
+    $font-Flaticon-031-cursor: "\f11e";
+    $font-Flaticon-032-finger: "\f11f";
+    $font-Flaticon-033-rgb: "\f120";
+    $font-Flaticon-034-grid: "\f121";
+    $font-Flaticon-035-levels: "\f122";
+    $font-Flaticon-036-brightness: "\f123";
+    $font-Flaticon-037-contrast: "\f124";
+    $font-Flaticon-038-delete: "\f125";
+    $font-Flaticon-039-crop: "\f126";
+    $font-Flaticon-040-artboard: "\f127";

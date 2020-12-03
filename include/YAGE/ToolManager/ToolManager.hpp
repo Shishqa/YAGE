@@ -2,11 +2,11 @@
 #ifndef SHISHGL_TOOL_MANAGER_HPP
 #define SHISHGL_TOOL_MANAGER_HPP
 /*============================================================================*/
+#include <list>
+
 #include "Image.hpp"
 #include "Vector2.hpp"
 #include "Tool.hpp"
-/*============================================================================*/
-using namespace ShishGL;
 /*============================================================================*/
 namespace YAGE {
 
@@ -28,10 +28,13 @@ namespace YAGE {
         static void setTool(Tool* new_tool);
 
         static Tool& activeTool();
+        static std::list<Tool*>& allTools();
 
     private:
 
         static Tool*& tool();
+
+        static std::list<Tool*>& tools();
 
     };
 

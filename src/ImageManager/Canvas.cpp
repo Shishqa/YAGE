@@ -11,6 +11,10 @@ Canvas::Canvas(const Sh::Frame& frame)
     addBehavior<CanvasBehavior>();
 }
 
+Canvas::~Canvas() {
+    removeBehavior<CanvasBehavior>();
+}
+
 /*----------------------------------------------------------------------------*/
 
 void Canvas::onRender() {

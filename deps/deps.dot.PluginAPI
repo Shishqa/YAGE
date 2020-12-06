@@ -1,0 +1,6 @@
+digraph "PluginAPI" {
+node [
+  fontsize = "12"
+];
+    "node0" [ label = "PluginAPI", shape = pentagon ];
+}

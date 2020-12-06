@@ -18,6 +18,8 @@ namespace YAGE {
 
         explicit Canvas(const Sh::Frame& viewport);
 
+        ~Canvas() override;
+
     protected:
 
         void onRender() override;

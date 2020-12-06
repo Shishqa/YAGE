@@ -22,11 +22,13 @@ namespace YAGE {
         void update(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
             img.fill(Sh::Color::NONE);
 
-            Sh::Vector2<int64_t> from = {std::min(pos.x, apply_pos.x),
-                                         std::min(pos.y, apply_pos.y)};
+            Sh::Vector2<int64_t> from = {std::max(0L, std::min(pos.x, apply_pos.x)),
+                                         std::max(0L, std::min(pos.y, apply_pos.y))};
 
-            Sh::Vector2<int64_t> to   = {std::max(pos.x, apply_pos.x),
-                                         std::max(pos.y, apply_pos.y)};
+            Sh::Vector2<int64_t> to   = {
+                    std::min(static_cast<int64_t>(img.size().x), std::max(pos.x, apply_pos.x)),
+                    std::min(static_cast<int64_t>(img.size().y), std::max(pos.y, apply_pos.y))
+            };
 
             for (int64_t x = from.x; x < to.x; ++x) {
                 for (int64_t y = from.y; y < to.y; ++y) {

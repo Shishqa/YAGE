@@ -7,6 +7,7 @@
 #include "ToolManager.hpp"
 #include "Tools.hpp"
 #include "MainPanels.hpp"
+#include "PluginManager.hpp"
 /*============================================================================*/
 namespace YAGE {
 
@@ -15,6 +16,10 @@ namespace YAGE {
 
         explicit YageApp(const Sh::Frame& frame)
                 : Sh::UIWindow(frame) {
+
+            if (!PluginManager::initPlugins()) {
+                return;
+            }
 
             ImageManager::createImage({800, 600});
 
@@ -42,6 +47,10 @@ namespace YAGE {
                 {150, frame.size.y - 30}
             });
 
+        }
+
+        ~YageApp() override {
+            PluginManager::deinitPlugins();
         }
 
     };

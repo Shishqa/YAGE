@@ -54,12 +54,7 @@ namespace YAGE {
                                 );
 
             }
-
-
         }
-
-
-
     };
 
 }

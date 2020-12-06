@@ -1,0 +1,6 @@
+digraph "TestAbstracts" {
+node [
+  fontsize = "12"
+];
+    "node22" [ label = "TestAbstracts", shape = egg ];
+}

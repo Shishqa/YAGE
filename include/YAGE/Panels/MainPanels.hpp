@@ -101,9 +101,10 @@ namespace YAGE::MainPanels {
     public:
 
         explicit AsidePanel(const Sh::Frame& frame)
-                : Sh::UIWindow(frame) {
+                : Sh::UIWindow(frame)
+                , n_layers(ImageManager::getLayers().size()) {
 
-            attach<LayerList>(
+            layer_list = attach<LayerList>(
                     Sh::Frame{ {0, 0}, {frame.size.x, 500} }
                     );
 
@@ -113,6 +114,26 @@ namespace YAGE::MainPanels {
 
         }
 
+        void onRender() override {
+
+            Sh::UIWindow::onRender();
+
+            if (n_layers != ImageManager::getLayers().size()) {
+
+                Sh::WindowManager::destroy(layer_list);
+                layer_list = attach<LayerList>(
+                        Sh::Frame{ {0, 0}, {getFrame().size.x, 500} }
+                );
+
+                n_layers = ImageManager::getLayers().size();
+            }
+
+        }
+
+    private:
+
+        size_t n_layers;
+        Sh::UIWindow* layer_list;
 
     };
 

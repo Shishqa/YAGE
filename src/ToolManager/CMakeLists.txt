@@ -18,6 +18,7 @@ target_sources(YAGE-ToolManager
 target_link_libraries(YAGE-ToolManager
   PUBLIC
     ShishGL
+    YAGE-Plugins
     YAGE-Properties
   )
 

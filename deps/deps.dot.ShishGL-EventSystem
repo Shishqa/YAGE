@@ -1,0 +1,12 @@
+digraph "ShishGL-EventSystem" {
+node [
+  fontsize = "12"
+];
+    "node3" [ label = "ShishGL-EventSystem", shape = octagon ];
+    "node4" [ label = "ShishGL-LogSystem", shape = octagon ];
+    "node3" -> "node4"  // ShishGL-EventSystem -> ShishGL-LogSystem
+    "node5" [ label = "ShishGL-Primitives", shape = octagon ];
+    "node4" -> "node5"  // ShishGL-LogSystem -> ShishGL-Primitives
+    "node5" [ label = "ShishGL-Primitives", shape = octagon ];
+    "node3" -> "node5"  // ShishGL-EventSystem -> ShishGL-Primitives
+}

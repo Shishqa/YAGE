@@ -11,6 +11,7 @@
 #include "Convert.hpp"
 #include "Behaviors.hpp"
 #include "Styles.hpp"
+#include "GUI.hpp"
 /*============================================================================*/
 namespace YAGE {
 
@@ -82,49 +83,90 @@ namespace YAGE {
             applyStyle<Sh::UIWindow::NORMAL>(
                     Sh::ColorFill{Sh::Color(38, 38, 38)}
                     );
+
+            //addBehavior<Sh::OneShot>();
+        }
+
+        ~ColorPicker() override {
+            //removeBehavior<Sh::OneShot>();
         }
 
     };
+//
+//    class ColorToolerBehavior : public Sh::Che {
+//    public:
+//
+//        explicit ColorToolerBehavior(Sh::UIWindow* target)
+//                : Sh::Clickable(target)
+//                , spawned_window(false)
+//                { }
+//
+//        void reactOnRelease(Sh::MouseButtonEvent& event) override {
+//
+//            /*
+//            if (spawned_window) {
+//                return;
+//            }
+//             */
+//
+//            Sh::Vector2<double> where = event.where() - target<Sh::UIWindow>()->getPos();
+//
+//            if (where.x + where.y < std::min(
+//                    target<Sh::UIWindow>()->getFrame().size.x,
+//                    target<Sh::UIWindow>()->getFrame().size.y)) {
+//
+//                Sh::WindowManager::Root()->attach<ColorPicker>(
+//                        Sh::Frame{
+//                            target<Sh::UIWindow>()->getPos() +
+//                                Sh::Vector2<double>{
+//                                    target<Sh::UIWindow>()->getFrame().size.x,
+//                                    0
+//                                },
+//                            {200, 250}
+//                        },
+//                        &ColorManager::primary
+//                );
+//
+//                spawned_window = true;
+//            }
+//        }
+//
+//    private:
+//
+//        bool spawned_window;
+//
+//    };
 
-    class ColorToolerBehavior : public Sh::Clickable {
+
+    class ColorPickerSpawner {
     public:
 
-        explicit ColorToolerBehavior(Sh::UIWindow* target)
-                : Sh::Clickable(target)
-                , spawned_window(false)
+        explicit ColorPickerSpawner(const Sh::Vector2<double>& position)
+                : pos(position)
+                , spawned_window(nullptr)
                 { }
 
-        void reactOnRelease(Sh::MouseButtonEvent& event) override {
+        void on() {
 
-            if (spawned_window) {
-                return;
-            }
-
-            Sh::Vector2<double> where = event.where() - target<Sh::UIWindow>()->getPos();
-
-            if (where.x + where.y < std::min(
-                    target<Sh::UIWindow>()->getFrame().size.x,
-                    target<Sh::UIWindow>()->getFrame().size.y)) {
-
-                Sh::WindowManager::Root()->attach<ColorPicker>(
+            spawned_window = Sh::WindowManager::Root()->attach<ColorPicker>(
                         Sh::Frame{
-                            target<Sh::UIWindow>()->getPos() +
-                                Sh::Vector2<double>{
-                                    target<Sh::UIWindow>()->getFrame().size.x,
-                                    0
-                                },
-                            {200, 250}
+                            pos, {200, 250}
                         },
                         &ColorManager::primary
                 );
+        }
 
-                spawned_window = true;
-            }
+        void off() {
+
+            Sh::WindowManager::destroy(spawned_window);
+            spawned_window = nullptr;
+
         }
 
     private:
 
-        bool spawned_window;
+        Sh::Vector2<double> pos;
+        Sh::UIWindow* spawned_window;
 
     };
 
@@ -137,7 +179,13 @@ namespace YAGE {
                 , secondary(ColorManager::secondary) {
 
             update();
-            addBehavior<ColorToolerBehavior>();
+            addBehavior<Sh::CheckboxBehavior<ColorPickerSpawner>>(
+                    getPos() + Sh::Vector2<double>{frame.size.x, 0}
+                    );
+        }
+
+        ~ColorTooler() override {
+            removeBehavior<Sh::CheckboxBehavior<ColorPickerSpawner>>();
         }
 
         void onRender() override {

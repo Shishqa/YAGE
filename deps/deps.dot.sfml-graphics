@@ -1,0 +1,10 @@
+digraph "sfml-graphics" {
+node [
+  fontsize = "12"
+];
+    "node12" [ label = "sfml-graphics", shape = doubleoctagon ];
+    "node13" [ label = "sfml-window", shape = doubleoctagon ];
+    "node12" -> "node13" [ style = dashed ] // sfml-graphics -> sfml-window
+    "node14" [ label = "sfml-system", shape = doubleoctagon ];
+    "node13" -> "node14" [ style = dashed ] // sfml-window -> sfml-system
+}

@@ -1,0 +1,8 @@
+digraph "YAGE-Panels" {
+node [
+  fontsize = "12"
+];
+    "node28" [ label = "YAGE-Panels", shape = octagon ];
+    "node30" [ label = "yage", shape = egg ];
+    "node30" -> "node28" [ style = dotted ] // yage -> YAGE-Panels
+}

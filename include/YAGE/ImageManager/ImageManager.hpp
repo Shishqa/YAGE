@@ -67,7 +67,11 @@ namespace YAGE {
         }
 
         static void addLayer() {
-            Layers().emplace_back(Layers().begin()->size(), Sh::Color::NONE);
+            ActiveLayer()++;
+            printf("Layers size: %lu\n", Layers().size());
+            Layers().emplace(ActiveLayer(), Layers().begin()->size(), Sh::Color::NONE);
+            printf("Layers size: %lu\n", Layers().size());
+            ActiveLayer()--;
         }
 
     private:

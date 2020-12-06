@@ -1,0 +1,119 @@
+digraph "YAGE" {
+node [
+  fontsize = "12"
+];
+subgraph clusterLegend {
+  label = "Legend";
+  color = black;
+  edge [ style = invis ];
+  legendNode0 [ label = "Executable", shape = egg ];
+  legendNode1 [ label = "Static Library", shape = octagon ];
+  legendNode2 [ label = "Shared Library", shape = doubleoctagon ];
+  legendNode3 [ label = "Module Library", shape = tripleoctagon ];
+  legendNode4 [ label = "Interface Library", shape = pentagon ];
+  legendNode5 [ label = "Object Library", shape = hexagon ];
+  legendNode6 [ label = "Unknown Library", shape = septagon ];
+  legendNode7 [ label = "Custom Target", shape = box ];
+  legendNode0 -> legendNode1 [ style = solid ];
+  legendNode0 -> legendNode2 [ style = solid ];
+  legendNode0 -> legendNode3;
+  legendNode1 -> legendNode4 [ label = "Interface", style = dashed ];
+  legendNode2 -> legendNode5 [ label = "Private", style = dotted ];
+  legendNode3 -> legendNode6 [ style = solid ];
+  legendNode0 -> legendNode7;
+}
+    "node0" [ label = "PluginAPI", shape = pentagon ];
+    "node1" [ label = "ShishGL", shape = pentagon ];
+    "node2" [ label = "ShishGL-Core", shape = octagon ];
+    "node3" [ label = "ShishGL-EventSystem", shape = octagon ];
+    "node4" [ label = "ShishGL-LogSystem", shape = octagon ];
+    "node5" [ label = "ShishGL-Primitives", shape = octagon ];
+    "node4" -> "node5"  // ShishGL-LogSystem -> ShishGL-Primitives
+    "node3" -> "node4"  // ShishGL-EventSystem -> ShishGL-LogSystem
+    "node3" -> "node5"  // ShishGL-EventSystem -> ShishGL-Primitives
+    "node2" -> "node3"  // ShishGL-Core -> ShishGL-EventSystem
+    "node2" -> "node4"  // ShishGL-Core -> ShishGL-LogSystem
+    "node2" -> "node5"  // ShishGL-Core -> ShishGL-Primitives
+    "node6" [ label = "ShishGL-RenderSystem", shape = octagon ];
+    "node7" [ label = "ShishGL-GraphicsPlatform", shape = pentagon ];
+    "node7" -> "node4" [ style = dashed ] // ShishGL-GraphicsPlatform -> ShishGL-LogSystem
+    "node8" [ label = "ShishGL-PlatformEvents", shape = octagon ];
+    "node8" -> "node3"  // ShishGL-PlatformEvents -> ShishGL-EventSystem
+    "node9" [ label = "ShishGL-PlatformInput", shape = octagon ];
+    "node8" -> "node9"  // ShishGL-PlatformEvents -> ShishGL-PlatformInput
+    "node7" -> "node8" [ style = dashed ] // ShishGL-GraphicsPlatform -> ShishGL-PlatformEvents
+    "node7" -> "node9" [ style = dashed ] // ShishGL-GraphicsPlatform -> ShishGL-PlatformInput
+    "node7" -> "node5" [ style = dashed ] // ShishGL-GraphicsPlatform -> ShishGL-Primitives
+    "node10" [ label = "ShishGL-ResourceManager", shape = octagon ];
+    "node7" -> "node10" [ style = dashed ] // ShishGL-GraphicsPlatform -> ShishGL-ResourceManager
+    "node6" -> "node7"  // ShishGL-RenderSystem -> ShishGL-GraphicsPlatform
+    "node6" -> "node4"  // ShishGL-RenderSystem -> ShishGL-LogSystem
+    "node11" [ label = "ShishGL-SfmlPlatform", shape = octagon ];
+    "node11" -> "node7"  // ShishGL-SfmlPlatform -> ShishGL-GraphicsPlatform
+    "node12" [ label = "sfml-graphics", shape = doubleoctagon ];
+    "node13" [ label = "sfml-window", shape = doubleoctagon ];
+    "node14" [ label = "sfml-system", shape = doubleoctagon ];
+    "node13" -> "node14" [ style = dashed ] // sfml-window -> sfml-system
+    "node12" -> "node13" [ style = dashed ] // sfml-graphics -> sfml-window
+    "node11" -> "node12"  // ShishGL-SfmlPlatform -> sfml-graphics
+    "node11" -> "node14"  // ShishGL-SfmlPlatform -> sfml-system
+    "node11" -> "node13"  // ShishGL-SfmlPlatform -> sfml-window
+    "node6" -> "node11"  // ShishGL-RenderSystem -> ShishGL-SfmlPlatform
+    "node2" -> "node6"  // ShishGL-Core -> ShishGL-RenderSystem
+    "node2" -> "node10"  // ShishGL-Core -> ShishGL-ResourceManager
+    "node15" [ label = "ShishGL-Window", shape = octagon ];
+    "node15" -> "node4"  // ShishGL-Window -> ShishGL-LogSystem
+    "node15" -> "node6"  // ShishGL-Window -> ShishGL-RenderSystem
+    "node2" -> "node15"  // ShishGL-Core -> ShishGL-Window
+    "node1" -> "node2" [ style = dashed ] // ShishGL -> ShishGL-Core
+    "node16" [ label = "ShishGL-DebugUtilities", shape = octagon ];
+    "node17" [ label = "ShishGL-GUI", shape = octagon ];
+    "node18" [ label = "ShishGL-Behaviors", shape = octagon ];
+    "node18" -> "node2"  // ShishGL-Behaviors -> ShishGL-Core
+    "node19" [ label = "ShishGL-UIWindow", shape = octagon ];
+    "node20" [ label = "ShishGL-Shapes", shape = octagon ];
+    "node20" -> "node2"  // ShishGL-Shapes -> ShishGL-Core
+    "node19" -> "node20"  // ShishGL-UIWindow -> ShishGL-Shapes
+    "node19" -> "node15"  // ShishGL-UIWindow -> ShishGL-Window
+    "node18" -> "node19"  // ShishGL-Behaviors -> ShishGL-UIWindow
+    "node17" -> "node18"  // ShishGL-GUI -> ShishGL-Behaviors
+    "node17" -> "node2"  // ShishGL-GUI -> ShishGL-Core
+    "node17" -> "node20"  // ShishGL-GUI -> ShishGL-Shapes
+    "node21" [ label = "ShishGL-Styles", shape = pentagon ];
+    "node21" -> "node2" [ style = dashed ] // ShishGL-Styles -> ShishGL-Core
+    "node21" -> "node20" [ style = dashed ] // ShishGL-Styles -> ShishGL-Shapes
+    "node17" -> "node21"  // ShishGL-GUI -> ShishGL-Styles
+    "node17" -> "node19"  // ShishGL-GUI -> ShishGL-UIWindow
+    "node16" -> "node17"  // ShishGL-DebugUtilities -> ShishGL-GUI
+    "node1" -> "node16" [ style = dashed ] // ShishGL -> ShishGL-DebugUtilities
+    "node1" -> "node17" [ style = dashed ] // ShishGL -> ShishGL-GUI
+    "node22" [ label = "TestAbstracts", shape = egg ];
+    "node22" -> "node1" [ style = dotted ] // TestAbstracts -> ShishGL
+    "node23" [ label = "YAGE-ColorUtils", shape = octagon ];
+    "node23" -> "node1"  // YAGE-ColorUtils -> ShishGL
+    "node24" [ label = "YAGE-ImageManager", shape = octagon ];
+    "node24" -> "node1"  // YAGE-ImageManager -> ShishGL
+    "node25" [ label = "YAGE-ToolManager", shape = octagon ];
+    "node25" -> "node1"  // YAGE-ToolManager -> ShishGL
+    "node26" [ label = "YAGE-Properties", shape = octagon ];
+    "node26" -> "node1"  // YAGE-Properties -> ShishGL
+    "node25" -> "node26"  // YAGE-ToolManager -> YAGE-Properties
+    "node24" -> "node25"  // YAGE-ImageManager -> YAGE-ToolManager
+    "node27" [ label = "YAGE-Tools", shape = octagon ];
+    "node27" -> "node25"  // YAGE-Tools -> YAGE-ToolManager
+    "node24" -> "node27"  // YAGE-ImageManager -> YAGE-Tools
+    "node28" [ label = "YAGE-Panels", shape = octagon ];
+    "node28" -> "node1"  // YAGE-Panels -> ShishGL
+    "node28" -> "node23"  // YAGE-Panels -> YAGE-ColorUtils
+    "node28" -> "node24"  // YAGE-Panels -> YAGE-ImageManager
+    "node29" [ label = "YAGE-Plugins", shape = octagon ];
+    "node29" -> "node0"  // YAGE-Plugins -> PluginAPI
+    "node29" -> "node1"  // YAGE-Plugins -> ShishGL
+    "node30" [ label = "yage", shape = egg ];
+    "node30" -> "node1" [ style = dotted ] // yage -> ShishGL
+    "node30" -> "node24" [ style = dotted ] // yage -> YAGE-ImageManager
+    "node30" -> "node28" [ style = dotted ] // yage -> YAGE-Panels
+    "node30" -> "node29" [ style = dotted ] // yage -> YAGE-Plugins
+    "node30" -> "node25" [ style = dotted ] // yage -> YAGE-ToolManager
+    "node30" -> "node27" [ style = dotted ] // yage -> YAGE-Tools
+}

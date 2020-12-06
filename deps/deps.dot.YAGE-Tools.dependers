@@ -1,0 +1,16 @@
+digraph "YAGE-Tools" {
+node [
+  fontsize = "12"
+];
+    "node27" [ label = "YAGE-Tools", shape = octagon ];
+    "node24" [ label = "YAGE-ImageManager", shape = octagon ];
+    "node24" -> "node27"  // YAGE-ImageManager -> YAGE-Tools
+    "node28" [ label = "YAGE-Panels", shape = octagon ];
+    "node28" -> "node24"  // YAGE-Panels -> YAGE-ImageManager
+    "node30" [ label = "yage", shape = egg ];
+    "node30" -> "node28" [ style = dotted ] // yage -> YAGE-Panels
+    "node30" [ label = "yage", shape = egg ];
+    "node30" -> "node24" [ style = dotted ] // yage -> YAGE-ImageManager
+    "node30" [ label = "yage", shape = egg ];
+    "node30" -> "node27" [ style = dotted ] // yage -> YAGE-Tools
+}

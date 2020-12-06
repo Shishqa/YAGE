@@ -12,6 +12,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   set(CMAKE_CXX_EXTENSIONS OFF)
 
   set(RELEASE_FLAGS " \
+    -ldl \
     -O3 \
     -Wno-unused-parameter \
     -msse4.2 \
@@ -19,6 +20,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   ")
 
   set(DEBUG_FLAGS " \
+    -ldl \
     -g \
     -O3 \
     -msse4.2 \
@@ -52,12 +54,21 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 endif()
 
 
+add_library(PluginAPI INTERFACE)
 
+target_include_directories(PluginAPI
+  INTERFACE
+    ${YAGE_SOURCE_DIR}/include/PluginAPI
+  )
 
-
-add_executable(yage)
+target_sources(PluginAPI
+  INTERFACE
+    ${YAGE_SOURCE_DIR}/include/PluginAPI/api.hpp
+  )
 
 set(INCROOT ${YAGE_SOURCE_DIR}/include/YAGE)
+
+add_executable(yage)
 
 target_include_directories(yage
   PUBLIC
@@ -79,6 +90,7 @@ target_link_libraries(yage
     YAGE-Tools
     YAGE-ImageManager
     YAGE-Panels
+    YAGE-Plugins
   )
 
 add_subdirectory(src)
@@ -86,4 +98,5 @@ add_subdirectory(src/ColorUtils)
 add_subdirectory(src/ImageManager)
 add_subdirectory(src/Panels)
 add_subdirectory(src/ToolManager)
+add_subdirectory(src/Plugins)
 add_subdirectory(../00_ShishGL ShishGL)

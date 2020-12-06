@@ -1,0 +1,6 @@
+digraph "yage" {
+node [
+  fontsize = "12"
+];
+    "node30" [ label = "yage", shape = egg ];
+}

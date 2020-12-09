@@ -17,6 +17,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
     -Wno-unused-parameter \
     -msse4.2 \
     -march=native \
+    -Wno-strict-aliasing \
   ")
 
   set(DEBUG_FLAGS " \
@@ -36,6 +37,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 		-fsanitize=undefined -fno-sanitize-recover \
 		-fstack-protector -Wno-format-nonliteral \
     -fno-omit-frame-pointer \
+    -Wno-strict-aliasing \
   ")
 
   set (CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${DEBUG_FLAGS}")
@@ -47,7 +49,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   if (MSVC)
     add_compile_options(/W3 /WX)
   else()
-    add_compile_options(-W -Wall -Wextra -Wpedantic -Werror -pedantic-errors)
+    add_compile_options(-W -Wall -Wextra -Wpedantic -pedantic-errors)
   endif()
 
   set_property(GLOBAL PROPERTY USE_FOLDERS ON)

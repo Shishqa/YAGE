@@ -63,10 +63,6 @@ namespace YAGE::MainPanels {
 
         explicit AsidePanel(const Sh::Frame& frame);
 
-    private:
-
-        size_t n_layers;
-        Sh::UIWindow* layer_list;
     };
 
 }

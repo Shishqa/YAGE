@@ -11,7 +11,6 @@ target_sources(YAGE-Tools
   PUBLIC
     ${INCROOT}/Tools.hpp
   PRIVATE
-    ${INCROOT}/Utils.hpp
     ${INCROOT}/Pencil.hpp
     ${INCROOT}/Eraser.hpp
     ${INCROOT}/Rectangle.hpp

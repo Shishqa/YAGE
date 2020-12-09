@@ -9,6 +9,7 @@
 #include "MainPanels.hpp"
 #include "PluginManager.hpp"
 #include "PropertyList.hpp"
+#include "Pencil.hpp"
 /*============================================================================*/
 namespace YAGE {
 
@@ -54,6 +55,8 @@ namespace YAGE {
             ToolManager::allTools().push_back(ToolManager::getImpl<Tools::Pencil>());
             ToolManager::allTools().push_back(ToolManager::getImpl<Tools::Eraser>());
             ToolManager::allTools().push_back(ToolManager::getImpl<Tools::Rectangle>());
+
+            ToolManager::set<Tools::Pencil>();
 
             attach<MainPanels::MainMenu>(Sh::Frame{
                 {0, 0},

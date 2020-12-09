@@ -14,6 +14,7 @@ target_sources(YAGE-Panels
     ${INCROOT}/ToolList.hpp
     ${INCROOT}/PropertyList.hpp
     ${INCROOT}/ColorPicker.hpp
+    ${INCROOT}/ThicknessPicker.hpp
   PRIVATE
     MainPanels.cpp
     LayerList.cpp

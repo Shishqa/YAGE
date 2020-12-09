@@ -13,6 +13,7 @@
 #include "api.hpp"
 
 #include "Tool.hpp"
+#include "Stroke.hpp"
 
 /*============================================================================*/
 namespace YAGE {

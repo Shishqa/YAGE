@@ -65,10 +65,9 @@ MainPanels::CanvasFrame::CanvasFrame(const Sh::Frame& frame)
 /*============================================================================*/
 
 MainPanels::AsidePanel::AsidePanel(const Sh::Frame &frame)
-    : Sh::UIWindow(frame)
-    , n_layers(ImageManager::getLayers().size()) {
+    : Sh::UIWindow(frame) {
 
-    layer_list = attach<LayerPanel>(
+    attach<LayerPanel>(
         Sh::Frame{ {0, 0}, {frame.size.x, 700} }
     );
 

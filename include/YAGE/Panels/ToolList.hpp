@@ -135,7 +135,7 @@ namespace YAGE::ToolsPanel {
                 }
             }
 
-            Sh::EventSystem::sendEvent<ToolSelectEvent>(this, *ToolManager::allTools().begin());
+            Sh::EventSystem::sendEvent<ToolSelectEvent>(this, &ToolManager::activeTool());
         }
 
         bool onEvent(Sh::Event& event) override {

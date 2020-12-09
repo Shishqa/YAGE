@@ -2,6 +2,6 @@
   {
     "name" : "dummy",
     "version" : "1.0",
-    "path" : "plugins/DummyPlugin/plugin.so"
+    "path" : "plugins/DummyPlugin/fancy_plugin.so"
   }
 ]

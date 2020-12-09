@@ -4,21 +4,22 @@
 /*============================================================================*/
 #include "Pencil.hpp"
 /*============================================================================*/
-namespace YAGE {
+namespace YAGE::Tools {
 
     class Eraser : public Pencil {
     public:
 
-        Eraser() : Pencil()
-        { }
+        Eraser() : Pencil() {
+            addProperty<Thickness>(20);
+        }
 
         void startApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
             last_pos = pos;
-            draw(img, pos, property<Stroke>().activeThickness(), Sh::Color::NONE);
+            draw(img, pos, getProperty<Thickness>().value, Sh::Color::NONE);
         }
 
         void update(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
-            draw(img, pos, property<Stroke>().activeThickness(), Sh::Color::NONE);
+            draw(img, pos, getProperty<Thickness>().value, Sh::Color::NONE);
             last_pos = pos;
         }
 

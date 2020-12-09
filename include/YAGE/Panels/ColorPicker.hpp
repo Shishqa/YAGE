@@ -12,6 +12,8 @@
 #include "Behaviors.hpp"
 #include "Styles.hpp"
 #include "GUI.hpp"
+#include "ToolManager.hpp"
+#include "Stroke.hpp"
 /*============================================================================*/
 namespace YAGE {
 
@@ -19,7 +21,7 @@ namespace YAGE {
     public:
 
         struct Color {
-            double h, s, v;
+            double h, s, v, a;
         };
 
         static Color primary;
@@ -61,111 +63,43 @@ namespace YAGE {
 
         static constexpr double BORDER_SIZE = 5;
 
-        explicit ColorPicker(const Sh::Frame& frame, ColorManager::Color* to_pick)
-                : Sh::UIWindow(frame) {
-
-            attach<SVPicker>(
-                Sh::Frame{
-                    {BORDER_SIZE, BORDER_SIZE},
-                    {frame.size.x - 2 * BORDER_SIZE, frame.size.x - 2 * BORDER_SIZE}
-                },
-                to_pick
-                );
-
-            attach<HuePicker>(
-                Sh::Frame{
-                    {BORDER_SIZE, frame.size.x},
-                    {frame.size.x - 2 * BORDER_SIZE, frame.size.y - frame.size.x - BORDER_SIZE}
-                },
-                to_pick
-                );
-
-            applyStyle<Sh::UIWindow::NORMAL>(
-                    Sh::ColorFill{Sh::Color(38, 38, 38)}
-                    );
-
-            //addBehavior<Sh::OneShot>();
-        }
-
-        ~ColorPicker() override {
-            //removeBehavior<Sh::OneShot>();
-        }
+        explicit ColorPicker(const Sh::Frame& frame,
+                             ColorManager::Color* to_pick);
 
     };
-//
-//    class ColorToolerBehavior : public Sh::Che {
-//    public:
-//
-//        explicit ColorToolerBehavior(Sh::UIWindow* target)
-//                : Sh::Clickable(target)
-//                , spawned_window(false)
-//                { }
-//
-//        void reactOnRelease(Sh::MouseButtonEvent& event) override {
-//
-//            /*
-//            if (spawned_window) {
-//                return;
-//            }
-//             */
-//
-//            Sh::Vector2<double> where = event.where() - target<Sh::UIWindow>()->getPos();
-//
-//            if (where.x + where.y < std::min(
-//                    target<Sh::UIWindow>()->getFrame().size.x,
-//                    target<Sh::UIWindow>()->getFrame().size.y)) {
-//
-//                Sh::WindowManager::Root()->attach<ColorPicker>(
-//                        Sh::Frame{
-//                            target<Sh::UIWindow>()->getPos() +
-//                                Sh::Vector2<double>{
-//                                    target<Sh::UIWindow>()->getFrame().size.x,
-//                                    0
-//                                },
-//                            {200, 250}
-//                        },
-//                        &ColorManager::primary
-//                );
-//
-//                spawned_window = true;
-//            }
-//        }
-//
-//    private:
-//
-//        bool spawned_window;
-//
-//    };
 
-
-    class ColorPickerSpawner {
+    class ColorPickerSpawner : public Sh::ClickSwitchable {
     public:
 
-        explicit ColorPickerSpawner(const Sh::Vector2<double>& position)
-                : pos(position)
+        explicit ColorPickerSpawner(Sh::UIWindow* target)
+                : Sh::ClickSwitchable(target)
                 , spawned_window(nullptr)
                 { }
 
-        void on() {
+        void onSelect() override {
 
             spawned_window = Sh::WindowManager::Root()->attach<ColorPicker>(
                         Sh::Frame{
-                            pos, {200, 250}
+                            target<Sh::UIWindow>()->getPos() +
+                            Sh::Vector2<double>{target<Sh::UIWindow>()->getSize().x, 0},
+                            {200, 250}
                         },
                         &ColorManager::primary
                 );
         }
 
-        void off() {
-
+        void onDeselect() override {
             Sh::WindowManager::destroy(spawned_window);
             spawned_window = nullptr;
+        }
 
+        void onTargetUpdate() override {
+            Sh::WindowManager::destroy(spawned_window);
+            spawned_window = nullptr;
         }
 
     private:
 
-        Sh::Vector2<double> pos;
         Sh::UIWindow* spawned_window;
 
     };
@@ -179,13 +113,7 @@ namespace YAGE {
                 , secondary(ColorManager::secondary) {
 
             update();
-            addBehavior<Sh::CheckboxBehavior<ColorPickerSpawner>>(
-                    getPos() + Sh::Vector2<double>{frame.size.x, 0}
-                    );
-        }
-
-        ~ColorTooler() override {
-            removeBehavior<Sh::CheckboxBehavior<ColorPickerSpawner>>();
+            setBehavior<ColorPickerSpawner>();
         }
 
         void onRender() override {

@@ -6,32 +6,28 @@
 
 #include "Color.hpp"
 #include "UIWindow.hpp"
+#include "IProperty.hpp"
 /*============================================================================*/
 namespace YAGE {
 
-    class Stroke {
+    class Color : public Property {
     public:
 
-        /*--------------------------------------------------------------------*/
-        [[nodiscard]]
-        const Sh::Color& activeColor() const;
+        explicit Color(const Sh::Color& color)
+            : value(color)
+            { }
 
-        void setColor(const Sh::Color& new_color);
-        /*--------------------------------------------------------------------*/
+        Sh::Color value;
+    };
 
-        /*--------------------------------------------------------------------*/
-        [[nodiscard]]
-        const size_t& activeThickness() const;
+    class Thickness : public Property {
+    public:
 
-        void setThickness(const size_t& new_thickness);
-        /*--------------------------------------------------------------------*/
+        explicit Thickness(int64_t thick)
+            : value(thick)
+            { }
 
-    private:
-
-        Sh::Color color = Sh::Color::GREEN;
-
-        size_t thickness = 15;
-
+        int64_t value;
     };
 
 }

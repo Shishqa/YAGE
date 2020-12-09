@@ -18,13 +18,17 @@ namespace YAGE {
 
         explicit Canvas(const Sh::Frame& viewport);
 
-        ~Canvas() override;
+        void setUpdate() {
+            need_update = true;
+        }
 
     protected:
 
         void onRender() override;
 
     private:
+
+        bool need_update;
 
         friend class CanvasBehaviour;
 

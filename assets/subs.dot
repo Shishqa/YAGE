@@ -2,43 +2,52 @@ digraph {
 	node [shape=record]
 	"node(nil)" [label = "{address : (nil) | ROOT}"];
 
-	"node0x6030000335b0" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x60200004ac50" -> "node(nil)" [color=black, label="mask=16"];
-	"node0x6030000336d0" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x603000033460" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x603000033640" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x60200004a610" -> "node(nil)" [color=black, label="mask=10"];
-	"node0x603000033520" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x603000033040" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x603000032e00" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x603000033310" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x603000032bc0" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x621000300d00" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x604000036710" -> "node(nil)" [color=black, label="mask=7"];
-	"node0x6030000335b0" [label = "{address : 0x6030000335b0 | N4YAGE13LayerSelectorE}"];
+	"node0x55ad524033f0" -> "node(nil)" [color=black, label="mask=22"];
+	"node0x55ad5240c510" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad5240c390" -> "node(nil)" [color=black, label="mask=128"];
+	"node0x55ad523f8a80" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad52409120" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad523f7b00" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad524086c0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad521a1700" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad523fd3a0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad523dd0e0" -> "node(nil)" [color=black, label="mask=34"];
+	"node0x55ad523f94a0" -> "node(nil)" [color=black, label="mask=34"];
+	"node0x55ad521a0c40" -> "node(nil)" [color=black, label="mask=22"];
+	"node0x55ad523fad80" -> "node(nil)" [color=black, label="mask=22"];
+	"node0x55ad52408330" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad523f84d0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad523a5270" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x55ad524033f0" [label = "{address : 0x55ad524033f0 | N2Sh14DialogBehaviorE}"];
 
-	"node0x60200004ac50" [label = "{address : 0x60200004ac50 | N4YAGE16KeyboardListenerE}"];
+	"node0x55ad5240c510" [label = "{address : 0x55ad5240c510 | N2Sh12WindowCloserE}"];
 
-	"node0x6030000336d0" [label = "{address : 0x6030000336d0 | N4YAGE13LayerSelectorE}"];
+	"node0x55ad5240c390" [label = "{address : 0x55ad5240c390 | N4YAGE16KeyboardListenerE}"];
 
-	"node0x603000033460" [label = "{address : 0x603000033460 | N4YAGE14CanvasBehaviorE}"];
+	"node0x55ad523f8a80" [label = "{address : 0x55ad523f8a80 | N4YAGE10MainPanels12ImageCreatorE}"];
 
-	"node0x603000033640" [label = "{address : 0x603000033640 | N4YAGE13LayerSelectorE}"];
+	"node0x55ad52409120" [label = "{address : 0x55ad52409120 | N4YAGE10ToolsPanel12ToolSelectorE}"];
 
-	"node0x60200004a610" [label = "{address : 0x60200004a610 | N2Sh13FrameBehaviorE}"];
+	"node0x55ad523f7b00" [label = "{address : 0x55ad523f7b00 | N4YAGE10ToolsPanel12ToolSelectorE}"];
 
-	"node0x603000033520" [label = "{address : 0x603000033520 | N4YAGE13LayerSelectorE}"];
+	"node0x55ad524086c0" [label = "{address : 0x55ad524086c0 | N4YAGE10ToolsPanel12ToolSelectorE}"];
 
-	"node0x603000033040" [label = "{address : 0x603000033040 | N4YAGE10ToolsPanel12ToolSelectorE}"];
+	"node0x55ad521a1700" [label = "{address : 0x55ad521a1700 | N4YAGE13LayerSelectorE}"];
 
-	"node0x603000032e00" [label = "{address : 0x603000032e00 | N4YAGE10ToolsPanel12ToolSelectorE}"];
+	"node0x55ad523fd3a0" [label = "{address : 0x55ad523fd3a0 | N4YAGE13LayerSelectorE}"];
 
-	"node0x603000033310" [label = "{address : 0x603000033310 | N4YAGE18ColorPickerSpawnerE}"];
+	"node0x55ad523dd0e0" [label = "{address : 0x55ad523dd0e0 | N2Sh13FrameBehaviorE}"];
 
-	"node0x603000032bc0" [label = "{address : 0x603000032bc0 | N4YAGE10ToolsPanel12ToolSelectorE}"];
+	"node0x55ad523f94a0" [label = "{address : 0x55ad523f94a0 | N2Sh13FrameBehaviorE}"];
 
-	"node0x621000300d00" [label = "{address : 0x621000300d00 | N4YAGE10MainPanels5SaverE}"];
+	"node0x55ad521a0c40" [label = "{address : 0x55ad521a0c40 | 8SVSlider}"];
 
-	"node0x604000036710" [label = "{address : 0x604000036710 | N2Sh6DialogE}"];
+	"node0x55ad523fad80" [label = "{address : 0x55ad523fad80 | 9HueSlider}"];
+
+	"node0x55ad52408330" [label = "{address : 0x55ad52408330 | N4YAGE12LayerDeleterE}"];
+
+	"node0x55ad523f84d0" [label = "{address : 0x55ad523f84d0 | N4YAGE14CanvasBehaviorE}"];
+
+	"node0x55ad523a5270" [label = "{address : 0x55ad523a5270 | N4YAGE10LayerAdderE}"];
 
 }

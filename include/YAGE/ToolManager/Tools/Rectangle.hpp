@@ -6,13 +6,14 @@
 #include "Tool.hpp"
 #include "Stroke.hpp"
 /*============================================================================*/
-namespace YAGE {
+namespace YAGE::Tools {
 
     class Rectangle : public Tool {
     public:
 
-        Rectangle() : apply_pos({})
-        { }
+        Rectangle() : apply_pos({}) {
+            addProperty<Color>(Sh::Color::MAGENTA);
+        }
 
         void startApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
             apply_pos = pos;
@@ -34,8 +35,9 @@ namespace YAGE {
                 for (int64_t y = from.y; y < to.y; ++y) {
 
                     img.setPixel(
-                            Sh::Vector2<size_t>{static_cast<size_t>(x), static_cast<size_t>(y)},
-                            property<Stroke>().activeColor());
+                            Sh::Vector2<size_t>{
+                                static_cast<size_t>(x), static_cast<size_t>(y)},
+                                getProperty<Color>().value);
 
                 }
             }

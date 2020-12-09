@@ -5,6 +5,7 @@
 #include "GUI.hpp"
 #include "Styles.hpp"
 #include "ColorPicker.hpp"
+#include "ThicknessPicker.hpp"
 #include "IProperty.hpp"
 /*============================================================================*/
 namespace YAGE {
@@ -62,14 +63,17 @@ namespace YAGE {
 
                 } else if (prop.first == Property::getId<Thickness>()) {
 
-                    auto win = attach<Sh::UIWindow>(Sh::Frame{
+                    auto win = attach<Sh::UIHorizontalSlider<ThicknessPicker>>(Sh::Frame{
                         {10, curr_height},
-                        {getSize().x - 20, 30}
-                    });
+                        {getSize().x - 20, 20}
+                    }, 10);
                     curr_height += 40;
 
                     win->applyStyle<Sh::UIWindow::NORMAL>(
-                        Sh::ColorFill{ Sh::Color::MAGENTA }
+                        Sh::ColorFill{ Sh::Color{20, 20, 20} }
+                        );
+                    win->slider->applyStyle<Sh::UIWindow::NORMAL>(
+                        Sh::ColorFill{ Sh::Color(90, 90, 90) }
                         );
                 }
             }

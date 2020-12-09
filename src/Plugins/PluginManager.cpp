@@ -16,7 +16,7 @@ bool PluginManager::initPlugins() {
 
     for (auto& plug : plug_list) {
 
-        PluginToken (*get)() = nullptr;
+        PluginAPI::Plugin* (*get)() = nullptr;
 
         void* handle = dlopen(plug["path"].get<std::string_view>().data(), RTLD_NOW);
         if (!handle) {
@@ -24,16 +24,16 @@ bool PluginManager::initPlugins() {
             return false;
         }
 
-        get = reinterpret_cast<PluginToken (*)()>(dlsym(handle, "get"));
+        get = reinterpret_cast<PluginAPI::Plugin* (*)()>(dlsym(handle, "get_plugin"));
         if (!get) {
             printf("%s\n", dlerror());
         }
 
-        PluginToken new_plugin = get();
+        PluginAPI::Plugin* new_plugin = get();
 
         new_plugin->init();
 
-        Plugins()[handle] = new_plugin;
+        Plugins()[handle] = PluginToken{ new_plugin, plug["icon path"] };
 
     }
 
@@ -44,7 +44,7 @@ bool PluginManager::deinitPlugins() {
 
     for (auto& plugin : Plugins()) {
 
-        plugin.second->deinit();
+        plugin.second.impl->deinit();
         dlclose(plugin.first);
 
     }

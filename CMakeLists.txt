@@ -58,12 +58,12 @@ add_library(PluginAPI INTERFACE)
 
 target_include_directories(PluginAPI
   INTERFACE
-    ${YAGE_SOURCE_DIR}/include/PluginAPI
+    ${YAGE_SOURCE_DIR}/include/PluginAPI/api
   )
 
 target_sources(PluginAPI
   INTERFACE
-    ${YAGE_SOURCE_DIR}/include/PluginAPI/api.hpp
+    ${YAGE_SOURCE_DIR}/include/PluginAPI/api/api.hpp
   )
 
 set(INCROOT ${YAGE_SOURCE_DIR}/include/YAGE)

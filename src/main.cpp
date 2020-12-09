@@ -6,7 +6,6 @@
 #include "WindowManager.hpp"
 #include "SubscriptionManager.hpp"
 #include "FpsLabel.hpp"
-#include "Dialog.hpp"
 /*============================================================================*/
 using namespace YAGE;
 
@@ -19,16 +18,9 @@ int main(int argc, char* argv[]) {
         1800, 1000
     };
 
-    Sh::WindowManager::Root()->attach<Sh::UIWindow>(
-            Sh::Frame{{100, 20}, WIN_SIZE + Sh::Vector2<double>{20, 50}}
-            )
-            ->addBehavior<Sh::Dialog>()
-            ->applyStyle<Sh::UIWindow::NORMAL>(
-                    Sh::ColorFill{Sh::Color::DARK_SLATE_GRAY}
-            )
-            ->attach<YageApp>(
-                    Sh::Frame{{10, 40}, WIN_SIZE}
-                    );
+    auto app = Sh::WindowManager::create<YageApp>(Sh::Frame{{30, 50}, WIN_SIZE});
+
+    Sh::WindowManager::Root()->attach<Sh::UIDialog>(app);
 
     Sh::WindowManager::Root()->attach<Sh::FpsLabel>(
             Sh::Frame{{0, 0}, {100, 50}}

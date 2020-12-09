@@ -6,28 +6,28 @@
 #include "ToolManager.hpp"
 #include "Stroke.hpp"
 /*============================================================================*/
-namespace YAGE {
+namespace YAGE::Tools {
 
     class Pencil : public Tool {
     public:
 
-        Pencil() : last_pos({})
-        { }
+        Pencil() : last_pos({}) {
+            addProperty<Color>(Sh::Color::YELLOW);
+            addProperty<Thickness>(20);
+        }
 
         void startApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
             last_pos = pos;
-            draw(img, pos, property<Stroke>().activeThickness(),
-                 property<Stroke>().activeColor());
+            draw(img, pos, getProperty<Thickness>().value, getProperty<Color>().value);
         }
 
         void update(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
-            draw(img, pos, property<Stroke>().activeThickness(),
-                 property<Stroke>().activeColor());
+            draw(img, pos, getProperty<Thickness>().value, getProperty<Color>().value);
             last_pos = pos;
         }
 
         void stopApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
-            update(img, pos);
+            //update(img, pos);
         }
 
         [[nodiscard]]
@@ -37,8 +37,8 @@ namespace YAGE {
 
     protected:
 
-        static void draw(Sh::Image& img, const Sh::Vector2<int64_t>& pos,
-                         size_t thickness, const Sh::Color& color);
+        void draw(Sh::Image& img, const Sh::Vector2<int64_t>& pos,
+                  int64_t thickness, const Sh::Color& color) const;
 
         Sh::Vector2<int64_t> last_pos;
 

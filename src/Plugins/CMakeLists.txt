@@ -17,6 +17,7 @@ target_sources(YAGE-Plugins
 
 target_link_libraries(YAGE-Plugins
   PUBLIC
-    PluginAPI
     ShishGL
+    PluginAPI
+    YAGE-ToolManager
   )

@@ -11,15 +11,60 @@
 /*============================================================================*/
 namespace YAGE::ToolsPanel {
 
-    class ToolSelector {
+    class ToolSelectEvent : public Sh::Event {
     public:
 
-        explicit ToolSelector(Tool* impl)
-            : tool(impl)
+        explicit ToolSelectEvent(Tool* impl)
+            : impl_to_set(impl)
             { }
 
-        void operator()() {
-            ToolManager::setTool(tool);
+        Sh::EventMask mask() override {
+            return Sh::Event::getMask<ToolSelectEvent>();
+        }
+
+        [[nodiscard]]
+        Tool* tool() const {
+            return impl_to_set;
+        }
+
+        bool happen(Sh::Listener *listener) override {
+            return listener->onEvent(*this);
+        }
+
+    private:
+
+        Tool* impl_to_set;
+    };
+
+    /*------------------------------------------------------------------------*/
+
+    class ToolSelector : public Sh::Clickable {
+    public:
+
+        explicit ToolSelector(Sh::UIWindow* target, Tool* impl)
+            : Sh::Clickable(target)
+            , tool(impl)
+            { }
+
+        void reactOnRelease(Sh::MouseButtonEvent& event) override {
+            Sh::EventSystem::sendEvent<ToolSelectEvent>(target<Sh::UIWindow>(), tool);
+        }
+
+        bool onEvent(Sh::Event& event) override {
+
+            if (event.mask() != Sh::Event::getMask<ToolSelectEvent>()) {
+                return false;
+            }
+
+            auto tool_select = dynamic_cast<ToolSelectEvent&>(event);
+
+            if (tool_select.tool() == tool) {
+                target<Sh::UIWindow>()->setState(Sh::UIWindow::SELECTED);
+            } else {
+                target<Sh::UIWindow>()->setState(Sh::UIWindow::NORMAL);
+            }
+
+            return true;
         }
 
     private:
@@ -30,11 +75,11 @@ namespace YAGE::ToolsPanel {
     /*------------------------------------------------------------------------*/
 
     //////////////////////////////////////////////////////////
-    static constexpr Sh::Vector2<double> BUTTON_SIZE{40, 40};
+    static constexpr Sh::Vector2<double> BUTTON_SIZE{42, 42};
     static constexpr double PADDING = 5;
     static constexpr double SPACING = 3;
     static constexpr double TOOL_BORDER = 2;
-    static constexpr size_t N_BUTTONS_IN_ROW = 1;
+    static constexpr size_t N_BUTTONS_IN_ROW = 5;
     //////////////////////////////////////////////////////////
 
     class ToolList : public Sh::UIWindow {
@@ -60,14 +105,14 @@ namespace YAGE::ToolsPanel {
                     auto db_x = static_cast<double>(x);
                     auto db_y = static_cast<double>(y);
 
-                    attach<Sh::UIButton<ToolSelector>>(
+                    auto selector = attach<Sh::UIButton<ToolSelector>>(
                             Sh::Frame{
                                 {PADDING + db_x * BUTTON_SIZE.x + db_x * SPACING,
                                  PADDING + db_y * BUTTON_SIZE.y + db_y * SPACING},
                                 BUTTON_SIZE
                                 },
-                            *curr_tool)
-                            ->applyStyle<Sh::UIWindow::NORMAL>(
+                            *curr_tool);
+                    selector->applyStyle<Sh::UIWindow::NORMAL>(
                                     Sh::Bordered{TOOL_BORDER, Sh::Color::BLACK},
                                     Sh::ColorFill{Sh::Color::WHITE},
                                     Sh::TextureFill{(*curr_tool)->getIcon()}
@@ -77,15 +122,34 @@ namespace YAGE::ToolsPanel {
                                     Sh::ColorFill{Sh::Color::WHITE},
                                     Sh::TextureFill{(*curr_tool)->getIcon()}
                             )
-                            ->applyStyle<Sh::UIWindow::CLICK>(
+                            ->applyStyle<Sh::UIWindow::SELECTED>(
                                     Sh::Bordered{TOOL_BORDER, Sh::Color::RED},
                                     Sh::ColorFill{Sh::Color::WHITE},
                                     Sh::TextureFill{(*curr_tool)->getIcon()}
                             );
 
                     ++curr_tool;
+
+                    Sh::SubscriptionManager::subscribe<ToolSelectEvent>(this, selector);
+                    Sh::SubscriptionManager::subscribe<ToolSelectEvent>(selector->as<ToolSelector>(), this);
                 }
             }
+
+            Sh::EventSystem::sendEvent<ToolSelectEvent>(this, *ToolManager::allTools().begin());
+        }
+
+        bool onEvent(Sh::Event& event) override {
+
+            if (event.mask() != Sh::Event::getMask<ToolSelectEvent>()) {
+                return false;
+            }
+
+            auto tool_select = dynamic_cast<ToolSelectEvent&>(event);
+
+            ToolManager::setTool(tool_select.tool());
+            Sh::EventSystem::sendEvent(this, event);
+
+            return true;
 
         }
     };

@@ -7,21 +7,18 @@ using namespace YAGE;
 /*============================================================================*/
 
 Canvas::Canvas(const Sh::Frame& frame)
-        : UICanvas(frame) {
-    addBehavior<CanvasBehavior>();
-}
-
-Canvas::~Canvas() {
-    removeBehavior<CanvasBehavior>();
+        : UICanvas(frame)
+        , need_update(true) {
+    setBehavior<CanvasBehavior>();
 }
 
 /*----------------------------------------------------------------------------*/
 
 void Canvas::onRender() {
-
-    //canvas.fill(Sh::Color::WHITE);
-    ImageManager::displayTo(canvas);
-
+    if (need_update) {
+        ImageManager::displayTo(canvas);
+        need_update = false;
+    }
     UICanvas::onRender();
 }
 
@@ -30,7 +27,7 @@ void Canvas::onRender() {
 CanvasBehavior::CanvasBehavior(Sh::UIWindow* target)
         : Clickable(target)
         , applying_tool(false) {
-    ToolManager::set<Pencil>();
+    ToolManager::set<Tools::Pencil>();
 }
 
 /*----------------------------------------------------------------------------*/
@@ -59,17 +56,21 @@ bool CanvasBehavior::onMouseButton(Sh::MouseButtonEvent& event) {
                 );
     }
 
+    target<Canvas>()->setUpdate();
     return true;
 }
 
 /*----------------------------------------------------------------------------*/
 
 bool CanvasBehavior::onMouseMove(Sh::MouseEvent& event) {
+
      if (applying_tool) {
          ToolManager::activeTool().update(
                  ImageManager::getActiveLayer(),
                  static_cast<Sh::Vector2<int64_t>>(event.where() - target<Sh::Window>()->getPos())
                  );
+
+         target<Canvas>()->setUpdate();
          return true;
      }
 

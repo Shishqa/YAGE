@@ -21,6 +21,7 @@ if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
   ")
 
   set(DEBUG_FLAGS " \
+    -DNO_SFML_TEXT \
     -ldl \
     -g \
     -O3 \
@@ -88,17 +89,13 @@ target_sources(yage
 target_link_libraries(yage
   PUBLIC
     ShishGL
-    YAGE-ToolManager
+    YAGE-Backend
     YAGE-Tools
-    YAGE-ImageManager
     YAGE-Panels
-    YAGE-Plugins
   )
 
 add_subdirectory(src)
+add_subdirectory(src/Backend)
 add_subdirectory(src/ColorUtils)
-add_subdirectory(src/ImageManager)
 add_subdirectory(src/Panels)
-add_subdirectory(src/ToolManager)
-add_subdirectory(src/Plugins)
 add_subdirectory(../00_ShishGL ShishGL)

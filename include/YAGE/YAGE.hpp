@@ -7,7 +7,7 @@
 #include "ToolManager.hpp"
 #include "Tools.hpp"
 #include "MainPanels.hpp"
-#include "PluginManager.hpp"
+#include "Backend/PluginManager.hpp"
 #include "PropertyList.hpp"
 #include "Pencil.hpp"
 /*============================================================================*/
@@ -46,19 +46,9 @@ namespace YAGE {
         explicit YageApp(const Sh::Frame& frame)
                 : Sh::UIWindow(frame) {
 
-            if (!PluginManager::initPlugins()) {
-                return;
-            }
+            Sh::PLATFORM().setFont(Sh::ResourceManager::get("fonts/FiraCode-Regular.ttf"));
 
-            ImageManager::createImage({1380, 720});
-
-            ToolManager::allTools().push_back(ToolManager::getImpl<Tools::Pencil>());
-            ToolManager::allTools().push_back(ToolManager::getImpl<Tools::Eraser>());
-            ToolManager::allTools().push_back(ToolManager::getImpl<Tools::Rectangle>());
-
-            ToolManager::set<Tools::Pencil>();
-
-            attach<MainPanels::MainMenu>(Sh::Frame{
+            attach<MainPanels::UpperMenu>(Sh::Frame{
                 {0, 0},
                 {frame.size.x, 30}
             });
@@ -66,12 +56,26 @@ namespace YAGE {
             attach<ToolsPanel::ToolList>(Sh::Frame{
                 {0, 30},
                 {250, 200}
-            });
+            })->applyStyle<Sh::UIWindow::NORMAL>(
+                Sh::ColorFill{ Sh::Color(70, 70, 100) }
+                );
+
+            attach<ColorPicker>(Sh::Frame{
+                {0, 230},
+                {125, 200}
+            }, &GlobalColorManager::PrimaryColor());
+
+            attach<ColorPicker>(Sh::Frame{
+                {125, 230},
+                {125, 200}
+            }, &GlobalColorManager::SecondaryColor());
 
             attach<PropertyList>(Sh::Frame{
-                {0, 230},
+                {0, 430},
                 {250, frame.size.y - 230}
-            });
+            })->applyStyle<Sh::UIWindow::NORMAL>(
+                Sh::ColorFill{ Sh::Color(70, 70, 100) }
+                );
 
             attach<MainPanels::CanvasFrame>(Sh::Frame{
                 {250, 30},
@@ -81,13 +85,11 @@ namespace YAGE {
             attach<MainPanels::AsidePanel>(Sh::Frame{
                 {frame.size.x - 100, 30},
                 {100, frame.size.y - 30}
-            });
+            })->applyStyle<Sh::UIWindow::NORMAL>(
+                Sh::ColorFill{ Sh::Color(70, 70, 100) }
+                );
 
             setBehavior<KeyboardListener>();
-        }
-
-        ~YageApp() override {
-            PluginManager::deinitPlugins();
         }
 
     };

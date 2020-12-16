@@ -14,25 +14,8 @@ namespace YAGE {
     public:
 
         explicit PropertyList(const Sh::Frame& frame)
-                : Sh::UIFrame(frame)
-                , for_tool(&ToolManager::activeTool()){
-
-            applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill( Sh::Color::GREY )
-                );
-
+                : Sh::UIFrame(frame) {
             update();
-        }
-
-        void onRender() override {
-
-            Sh::UIFrame::onRender();
-
-            if (for_tool != &ToolManager::activeTool()) {
-                for_tool = &ToolManager::activeTool();
-                update();
-            }
-
         }
 
         void update() {
@@ -47,43 +30,42 @@ namespace YAGE {
                 Sh::WindowManager::destroy(detach(child));
             }
 
-            double curr_height = 10;
-            for (auto& prop : ToolManager::activeTool().getProperties()) {
+            double curr_offset = 0;
 
-                if (prop.first == Property::getId<Color>()) {
+            for (auto& prop : TOOL_MANAGER().activeTool().getProperties()) {
 
-                    attach<ColorPicker>(Sh::Frame{
-                        {10, curr_height},
-                        {getSize().x - 20, getSize().x + 10}
-                    },
-                    &ColorManager::primary
-                    );
+                if (prop.first == Property::getId<ColorProp>()) {
 
-                    curr_height += getSize().x + 20;
+                    attach<ColorPicker>(
+                        Sh::Frame{ {0, curr_offset}, {getSize().x, 400} },
+                        dynamic_cast<ColorProp*>(prop.second)
+                        );
+
+                    curr_offset += 400;
 
                 } else if (prop.first == Property::getId<Thickness>()) {
 
-                    auto win = attach<Sh::UIHorizontalSlider<ThicknessPicker>>(Sh::Frame{
-                        {10, curr_height},
-                        {getSize().x - 20, 20}
-                    }, 10);
-                    curr_height += 40;
+                    auto slider = attach<Sh::UIHorizontalSlider<IntPropPicker>>(
+                        Sh::Frame{ {0, curr_offset}, {getSize().x, 30} }, 30,
+                        dynamic_cast<Thickness*>(prop.second)
+                        );
 
-                    win->applyStyle<Sh::UIWindow::NORMAL>(
-                        Sh::ColorFill{ Sh::Color{20, 20, 20} }
+                    slider->applyStyle<Sh::UIWindow::NORMAL>(
+                        Sh::ColorFill{ Sh::Color::MAGENTA }
                         );
-                    win->slider->applyStyle<Sh::UIWindow::NORMAL>(
-                        Sh::ColorFill{ Sh::Color(90, 90, 90) }
+
+                    slider->slider->applyStyle<Sh::UIWindow::NORMAL>(
+                        Sh::ColorFill{ Sh::Color::WHITE }
                         );
+
+                    curr_offset += 30;
+
                 }
+
             }
 
-            fit();
         }
 
-    private:
-
-        Tool* for_tool;
 
     };
 

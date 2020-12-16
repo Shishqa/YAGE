@@ -10,71 +10,32 @@
 using namespace YAGE;
 /*============================================================================*/
 
-ColorManager::Color ColorManager::primary   = {0.0, 0.0, 0.0, 1.0};
-ColorManager::Color ColorManager::secondary = {0.0, 0.0, 1.0, 1.0};
-
-/*============================================================================*/
-
-class HueSlider : public Sh::Slidable {
-public:
-
-    explicit HueSlider(Sh::UIWindow* target,
-                       const Sh::Frame& frame,
-                       ColorManager::Color* selectable)
-            : Sh::Slidable(target, frame)
-            , color(selectable)
-            { }
-
-    void onSlide(const Sh::Vector2<double>& pos) override {
-
-        color->h = pos.x;
-        Sh::Color new_color = ColorUtils::Convert::HSVtoRGB(color->h,
-                                                            color->s,
-                                                            color->v);
-
-        new_color.a = static_cast<uint8_t>(color->a * 255);
-
-        ToolManager::activeTool().getProperty<Color>().value = new_color;
-    }
-
-private:
-
-    ColorManager::Color* color;
-};
+HueSlider::HueSlider(Sh::UIWindow* target,
+                     const Sh::Frame& frame,
+                     ColorProp* to_track)
+        : PropSlider(target, frame, to_track)
+        { }
 
 /*----------------------------------------------------------------------------*/
 
-class SVSlider : public Sh::Slidable {
-public:
+void HueSlider::modifyProp(const Sh::Vector2<double> &pos) {
 
-    explicit SVSlider(Sh::UIWindow* target, const Sh::Frame& frame,
-                      ColorManager::Color* selectable)
-            : Sh::Slidable(target, frame)
-            , color(selectable)
-            { }
+    getProp<ColorProp>()->h = pos.x;
+    Sh::EventSystem::sendEvent<PropUpdateEvent>(getProp<ColorProp>(), getProp<ColorProp>());
 
-    void onSlide(const Sh::Vector2<double>& pos) override {
+}
 
-        color->s = pos.x;
-        color->v = 1 - pos.y;
-        Sh::Color new_color = ColorUtils::Convert::HSVtoRGB(color->h,
-                                                            color->s,
-                                                            color->v);
-        new_color.a = static_cast<uint8_t>(color->a * 255);
+/*----------------------------------------------------------------------------*/
 
-        ToolManager::activeTool().getProperty<Color>().value = new_color;
-    }
-
-private:
-
-    ColorManager::Color* color;
-
-};
+void HueSlider::onPropUpdate() {
+    set({getProp<ColorProp>()->h, 0});
+}
 
 /*============================================================================*/
 
-YAGE::HuePicker::HuePicker(const Sh::Frame& frame, ColorManager::Color* color)
-        : Sh::UICanvas(frame, Sh::Color::BLACK) {
+YAGE::HuePicker::HuePicker(const Sh::Frame& frame, ColorProp* to_track)
+        : Sh::UICanvas(frame, Sh::Color::BLACK)
+        , color(to_track) {
 
     for (int64_t x = 0; x < static_cast<int64_t>(canvas.size().x); ++x) {
 
@@ -87,42 +48,53 @@ YAGE::HuePicker::HuePicker(const Sh::Frame& frame, ColorManager::Color* color)
         }
     }
 
-    auto sl = attach<Sh::UIHorizontalSlider<HueSlider>>(
+    auto slider = attach<Sh::UIHorizontalSlider<HueSlider>>(
             Sh::Frame{ {0, 0}, frame.size }, 10, color
             );
-    sl->slider->applyStyle<Sh::UIWindow::NORMAL>(
+    slider->slider->applyStyle<Sh::UIWindow::NORMAL>(
                     Sh::Bordered{2, Sh::Color::BLACK},
                     Sh::ColorFill{Sh::Color::WHITE}
                     );
+
+    slider->slider->as<HueSlider>()->onPropUpdate();
 }
 
 /*============================================================================*/
 
-SVPicker::SVPicker(const Sh::Frame& frame, ColorManager::Color* c)
-        : Sh::UICanvas(frame, Sh::Color::WHITE)
-        , last_hue(c->h)
-        , color(c) {
+SVSlider::SVSlider(Sh::UIWindow* target,
+                   const Sh::Frame& frame,
+                   ColorProp* to_track)
+        : PropSlider(target, frame, to_track)
+        { }
 
-    auto sl = attach<Sh::UIFreeSlider<SVSlider>>(
+void SVSlider::modifyProp(const Sh::Vector2<double> &pos) {
+    getProp<ColorProp>()->s = pos.x;
+    getProp<ColorProp>()->v = 1 - pos.y;
+}
+
+void SVSlider::onPropUpdate() {
+    set({getProp<ColorProp>()->s, 1 - getProp<ColorProp>()->v});
+}
+
+/*============================================================================*/
+
+SVPicker::SVPicker(const Sh::Frame& frame, ColorProp* to_track)
+        : Sh::UICanvas(frame, Sh::Color::WHITE)
+        , color(to_track) {
+
+    slider = attach<Sh::UIFreeSlider<SVSlider>>(
             Sh::Frame{{0, 0}, frame.size}, Sh::Vector2<double>{10, 10},
             color
             );
-    sl->slider->applyStyle<Sh::UIWindow::NORMAL>(
+    slider->slider->applyStyle<Sh::UIWindow::NORMAL>(
                     Sh::Bordered{2, Sh::Color::BLACK},
                     Sh::ColorFill{Sh::Color::WHITE}
                     );
 
+    slider->slider->as<SVSlider>()->onPropUpdate();
+
+    Sh::SubscriptionManager::subscribe<PropUpdateEvent>(this, color);
     update();
-}
-
-void SVPicker::onRender() {
-
-    if (color->h != last_hue) {
-        last_hue = color->h;
-        update();
-    }
-
-    Sh::UICanvas::onRender();
 }
 
 void SVPicker::update() {
@@ -140,13 +112,28 @@ void SVPicker::update() {
             );
         }
     }
+}
 
+bool SVPicker::onEvent(Sh::Event& event) {
+
+    if (event.mask() != Sh::Event::getMask<PropUpdateEvent>()) {
+        return false;
+    }
+
+    auto prop_update = dynamic_cast<PropUpdateEvent&>(event);
+
+    if (prop_update.updated() == color) {
+        update();
+        return true;
+    }
+
+    return false;
 }
 
 /*============================================================================*/
 
 ColorPicker::ColorPicker(const Sh::Frame &frame,
-                         ColorManager::Color *to_pick)
+                         ColorProp* to_track)
         : Sh::UIWindow(frame) {
 
     attach<SVPicker>(
@@ -154,7 +141,7 @@ ColorPicker::ColorPicker(const Sh::Frame &frame,
             {BORDER_SIZE, BORDER_SIZE},
             {frame.size.x - 2 * BORDER_SIZE, frame.size.x - 2 * BORDER_SIZE}
         },
-        to_pick
+        to_track
     );
 
     attach<HuePicker>(
@@ -162,7 +149,7 @@ ColorPicker::ColorPicker(const Sh::Frame &frame,
             {BORDER_SIZE, frame.size.x},
             {frame.size.x - 2 * BORDER_SIZE, frame.size.y - frame.size.x - BORDER_SIZE}
         },
-        to_pick
+        to_track
     );
 
     applyStyle<Sh::UIWindow::NORMAL>(

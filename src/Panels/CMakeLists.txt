@@ -10,6 +10,7 @@ target_include_directories(YAGE-Panels
 target_sources(YAGE-Panels
   PUBLIC
     ${INCROOT}/MainPanels.hpp
+    ${INCROOT}/Canvas.hpp
     ${INCROOT}/LayerList.hpp
     ${INCROOT}/ToolList.hpp
     ${INCROOT}/PropertyList.hpp
@@ -17,6 +18,7 @@ target_sources(YAGE-Panels
     ${INCROOT}/ThicknessPicker.hpp
   PRIVATE
     MainPanels.cpp
+    Canvas.cpp
     LayerList.cpp
     ToolList.cpp
     PropertyList.cpp
@@ -27,5 +29,5 @@ target_link_libraries(YAGE-Panels
   PUBLIC
     ShishGL
     YAGE-ColorUtils
-    YAGE-ImageManager
+    YAGE-Backend
   )

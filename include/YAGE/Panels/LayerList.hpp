@@ -2,57 +2,14 @@
 #ifndef YAGE_LAYERLIST_HPP
 #define YAGE_LAYERLIST_HPP
 /*============================================================================*/
-#include "ImageManager.hpp"
 #include "GUI.hpp"
 #include "Styles.hpp"
 #include "Behaviors.hpp"
+#include "SessionManager.hpp"
 /*============================================================================*/
 namespace YAGE {
 
-    class LayerSelectEvent : public Sh::Event {
-    public:
-
-        explicit LayerSelectEvent(size_t layer)
-                : selected_layer(layer)
-                { }
-
-        [[nodiscard]]
-        size_t layer() const {
-            return selected_layer;
-        }
-
-        Sh::EventMask mask() override {
-            return Sh::Event::getMask<LayerSelectEvent>();
-        }
-
-        bool happen(Sh::Listener* listener) override {
-            return listener->onEvent(*this);
-        }
-
-    private:
-
-        size_t selected_layer;
-    };
-
-    /*------------------------------------------------------------------------*/
-
-    class LayerSelector : public Sh::Clickable {
-    public:
-
-        explicit LayerSelector(Sh::UIWindow* target, size_t layer);
-
-        void reactOnRelease(Sh::MouseButtonEvent& event) override;
-
-        bool onEvent(Sh::Event& event) override;
-
-    private:
-
-        size_t to_set;
-    };
-
-    /*------------------------------------------------------------------------*/
-
-    class LayerList : public Sh::UIFrame {
+    class LayerList : public Sh::UISelectList {
     public:
 
         static constexpr double BUTTON_HEIGHT = 30;
@@ -62,9 +19,9 @@ namespace YAGE {
 
         bool onEvent(Sh::Event& event) override;
 
-        void onRender() override;
+        void update() override;
 
-        void update();
+        void onSelect(int option) override;
 
     private:
 
@@ -82,7 +39,7 @@ namespace YAGE {
                 { }
 
         void reactOnRelease(Sh::MouseButtonEvent&) override {
-            ImageManager::addLayer();
+            LAYER_MANAGER().addLayer();
         }
     };
 
@@ -94,9 +51,8 @@ namespace YAGE {
                 { }
 
         void reactOnRelease(Sh::MouseButtonEvent&) override {
-            ImageManager::removeLayer();
+            LAYER_MANAGER().removeLayer();
         }
-
     };
 
 
@@ -106,34 +62,27 @@ namespace YAGE {
         explicit LayerPanel(const Sh::Frame& frame)
                 : Sh::UIWindow(frame) {
 
-            auto adder = attach<Sh::UILabelButton<LayerAdder>>(
-                Sh::Frame{ {10, 10}, {(frame.size.x - 30) / 2, 30} },
-                "+", Sh::IPlatform::Align::CENTER
-                );
-            adder->label->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color::BLACK }
+            auto adder = attach<Sh::UIButton<LayerAdder>>(
+                Sh::Frame{ {10, 10}, {(frame.size.x - 30) / 2, 30} }
                 );
             adder->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color(70, 140, 70) }
+                Sh::ColorFill{ Sh::Color(70, 140, 70) },
+                Sh::Label("+", Sh::Color::BLACK, 20, Sh::Text::Align::CENTER)
                 );
 
-            auto deleter = attach<Sh::UILabelButton<LayerDeleter>>(
-                Sh::Frame{ {(frame.size.x - 30) / 2 + 20, 10}, {(frame.size.x - 30) / 2, 30} },
-                "-", Sh::IPlatform::Align::CENTER
-            );
-            deleter->label->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color::BLACK }
+            auto deleter = attach<Sh::UIButton<LayerDeleter>>(
+                Sh::Frame{ {(frame.size.x - 30) / 2 + 20, 10}, {(frame.size.x - 30) / 2, 30} }
             );
             deleter->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color(140, 70, 70) }
+                Sh::ColorFill{ Sh::Color(140, 70, 70) },
+                Sh::Label("-", Sh::Color::BLACK, 20, Sh::Text::Align::CENTER)
             );
 
-            attach<LayerList>(Sh::Frame{
+            auto list = attach<LayerList>(Sh::Frame{
                 {10, 50}, {frame.size.x - 20, 100}
             });
-
+            list->update();
         }
-
 
     };
 

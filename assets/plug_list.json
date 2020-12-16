@@ -1,8 +1,20 @@
 [
   {
-    "name" : "dummy",
+    "name" : "GaussianBlur",
     "version" : "1.0",
-    "path" : "plugins/DummyPlugin/fancy_plugin.so",
-    "icon path" : "plugins/DummyPlugin/icon.png"
+    "path" : "plugins/GaussianBlur/GaussianBlur.so",
+    "icon path" : "plugins/GaussianBlur/icon.png"
+  },
+  {
+    "name" : "BoxBlur",
+    "version" : "1.0",
+    "path" : "plugins/BoxBlur/BoxBlur.so",
+    "icon path" : "plugins/BoxBlur/icon.png"
+  },
+  {
+    "name" : "ColorFilter",
+    "version" : "1.0",
+    "path" : "plugins/ColorFilter/ColorFilter.so",
+    "icon path" : "plugins/ColorFilter/icon.png"
   }
 ]

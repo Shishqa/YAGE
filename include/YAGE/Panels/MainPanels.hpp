@@ -8,19 +8,9 @@
 #include "Canvas.hpp"
 #include "ColorPicker.hpp"
 #include "LayerList.hpp"
-#include "ImageManager.hpp"
 #include <climits>
 /*============================================================================*/
 namespace YAGE::MainPanels {
-
-    class ImageCreator : public Sh::Clickable {
-    public:
-
-        explicit ImageCreator(Sh::UIWindow* target);
-
-        void reactOnRelease(Sh::MouseButtonEvent& event) override;
-
-    };
 
     class ImageOpener : public Sh::Clickable {
     public:
@@ -28,6 +18,8 @@ namespace YAGE::MainPanels {
         explicit ImageOpener(Sh::UIWindow* target);
 
         void reactOnRelease(Sh::MouseButtonEvent& event) override;
+
+        bool onEvent(Sh::Event& event) override;
 
     };
 
@@ -38,14 +30,15 @@ namespace YAGE::MainPanels {
 
         void reactOnRelease(Sh::MouseButtonEvent&) override;
 
+        bool onEvent(Sh::Event& event) override;
     };
 
     /*------------------------------------------------------------------------*/
 
-    class MainMenu : public Sh::UIWindow {
+    class UpperMenu : public Sh::UIWindow {
     public:
 
-        explicit MainMenu(const Sh::Frame& frame);
+        explicit UpperMenu(const Sh::Frame& frame);
 
     };
 
@@ -57,6 +50,8 @@ namespace YAGE::MainPanels {
         explicit CanvasFrame(const Sh::Frame& frame);
 
     };
+
+    /*========================================================================*/
 
     class AsidePanel : public Sh::UIWindow {
     public:

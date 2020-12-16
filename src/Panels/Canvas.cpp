@@ -39,6 +39,10 @@ bool ToolSusceptible::onMouseButton(Sh::MouseButtonEvent& event) {
     if (event.state() == Sh::Mouse::DOWN &&
         event.button() == Sh::Mouse::LEFT) {
 
+        if (TOOL_MANAGER().activeTool().needLayer()) {
+            LAYER_MANAGER().addLayer();
+        }
+
         applying_tool = true;
         TOOL_MANAGER().activeTool().startApplying(
             LAYER_MANAGER().getActiveLayer(),

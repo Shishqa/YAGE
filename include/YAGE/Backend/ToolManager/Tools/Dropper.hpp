@@ -20,7 +20,7 @@ namespace YAGE::Tools {
         }
 
         void stopApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {
-            pickColor(img, pos);
+            //pickColor(img, pos);
         }
 
         std::string_view getIcon() const override {

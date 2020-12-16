@@ -11,8 +11,17 @@ namespace YAGE {
     class Tool {
     public:
 
+        explicit Tool(bool on_new_layer = false)
+                : need_layer(on_new_layer)
+                { }
+
         using PropertyMap = std::unordered_map<uint8_t, Property*>;
-        
+
+        [[nodiscard]]
+        bool needLayer() const {
+            return need_layer;
+        }
+
         virtual void startApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) = 0;
 
         virtual void update(Sh::Image& img, const Sh::Vector2<int64_t>& pos) = 0;
@@ -56,6 +65,10 @@ namespace YAGE {
         std::unordered_map<uint8_t, Property*> properties;
 
         friend class ToolManager;
+
+    private:
+
+        bool need_layer;
     };
 
 }

@@ -10,7 +10,7 @@ namespace YAGE::Tools {
     class Rectangle : public Tool {
     public:
 
-        Rectangle() : apply_pos({})
+        Rectangle() : Tool(true), apply_pos({})
             {}
 
         void startApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {

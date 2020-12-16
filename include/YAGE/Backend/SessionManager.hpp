@@ -16,10 +16,7 @@ namespace YAGE {
 
         static bool initSession();
 
-        static bool finalizeSession() {
-            PluginManager::finalizePlugins();
-            return true;
-        }
+        static bool finalizeSession();
 
         struct SessionManagers {
 
@@ -29,8 +26,14 @@ namespace YAGE {
         };
 
         static SessionManagers& Session() {
-            static SessionManagers SESSION;
-            return SESSION;
+            return *SessionPtr();
+        }
+
+    private:
+
+        static SessionManagers*& SessionPtr() {
+            static SessionManagers* SESSION_PTR;
+            return SESSION_PTR;
         }
 
     };

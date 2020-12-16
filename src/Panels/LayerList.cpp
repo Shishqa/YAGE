@@ -34,15 +34,8 @@ void LayerList::onSelect(int option) {
 
 void LayerList::update() {
 
-    std::unordered_set<Sh::Window*> to_destroy;
-    for (auto& child : getChildren()) {
-        if (child != v_scrollbar && child != h_scrollbar) {
-            to_destroy.insert(child);
-        }
-    }
-    for (auto& child : to_destroy) {
-        Sh::WindowManager::destroy(detach(child));
-    }
+    n_layers = LAYER_MANAGER().numberOfLayers();
+    destroyChildren();
 
     for (size_t layer = 0; layer < n_layers; ++layer) {
 

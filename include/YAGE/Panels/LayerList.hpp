@@ -79,7 +79,7 @@ namespace YAGE {
             );
 
             auto list = attach<LayerList>(Sh::Frame{
-                {10, 50}, {frame.size.x - 20, 100}
+                {10, 50}, {frame.size.x - 20, 200}
             });
             list->update();
         }

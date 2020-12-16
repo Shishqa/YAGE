@@ -20,6 +20,8 @@ LayerManager& YAGE::LAYER_MANAGER() {
 
 bool SessionManager::initSession() {
 
+    SessionPtr() = new SessionManagers();
+
     Session().tool_manager.addTool<Tools::Pencil>();
     Session().tool_manager.addTool<Tools::Eraser>();
     Session().tool_manager.addTool<Tools::Rectangle>();
@@ -28,13 +30,24 @@ bool SessionManager::initSession() {
     Session().tool_manager.active_tool =
         *Session().tool_manager.tools.begin();
 
+    /*
     if (!PluginManager::initPlugins()) {
         return false;
     }
+     */
 
     Session().image_manager.createImage({1200, 800});
 
     return true;
+}
+
+bool SessionManager::finalizeSession() {
+
+    //PluginManager::finalizePlugins();
+    delete SessionPtr();
+
+    return true;
+
 }
 
 /*============================================================================*/

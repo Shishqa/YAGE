@@ -2,70 +2,73 @@ digraph {
 	node [shape=record]
 	"node(nil)" [label = "{address : (nil) | ROOT}"];
 
-	"node0x603000034030" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x60200004b570" -> "node(nil)" [color=black, label="mask=512"];
-	"node0x60200004b1d0" -> "node(nil)" [color=black, label="mask=10"];
-	"node0x60200004b110" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x60200004b050" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x6030000344b0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x603000034300" -> "node(nil)" [color=black, label="mask=6"];
 	"node0x60400003fd90" -> "node(nil)" [color=black, label="mask=70"];
-	"node0x602000048950" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x602000048ad0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x603000034210" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x60200004b6f0" -> "node(nil)" [color=black, label="mask=1024"];
+	"node0x60200004b350" -> "node(nil)" [color=black, label="mask=10"];
+	"node0x60200004b1d0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x603000034000" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x60200004b070" -> "node(nil)" [color=black, label="mask=10"];
+	"node0x602000048970" -> "node(nil)" [color=black, label="mask=6"];
 	"node0x603000031180" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x6030000341e0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x60b000022640" -> "node(nil)" [color=black, label="mask=70"];
+	"node0x60200004aed0" -> "node(nil)" [color=black, label="mask=10"];
 	"node0x60b000021d50" -> "node(nil)" [color=black, label="mask=70"];
-	"node0x60b000021a90" -> "node(nil)" [color=black, label="mask=70"];
-	"node0x603000033d30" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x602000048af0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x602000048cd0" -> "node(nil)" [color=black, label="mask=10"];
+	"node0x60b000022850" -> "node(nil)" [color=black, label="mask=70"];
+	"node0x60200004b290" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x603000030ee0" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x603000031420" -> "node(nil)" [color=black, label="mask=6"];
+	"node0x60b000022010" -> "node(nil)" [color=black, label="mask=70"];
 	"node0x603000030c40" -> "node(nil)" [color=black, label="mask=6"];
 	"node0x60b000022380" -> "node(nil)" [color=black, label="mask=70"];
-	"node0x60b0000220c0" -> "node(nil)" [color=black, label="mask=70"];
-	"node0x602000048cb0" -> "node(nil)" [color=black, label="mask=10"];
-	"node0x60200004ad50" -> "node(nil)" [color=black, label="mask=10"];
-	"node0x603000033f40" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x60b000022590" -> "node(nil)" [color=black, label="mask=70"];
-	"node0x603000030ee0" -> "node(nil)" [color=black, label="mask=6"];
-	"node0x60200004aef0" -> "node(nil)" [color=black, label="mask=10"];
-	"node0x603000034030" [label = "{address : 0x603000034030 | N2Sh10SelectableE}"];
+	"node0x6030000344b0" [label = "{address : 0x6030000344b0 | N2Sh12WindowCloserE}"];
 
-	"node0x60200004b570" [label = "{address : 0x60200004b570 | N4YAGE16KeyboardListenerE}"];
-
-	"node0x60200004b1d0" [label = "{address : 0x60200004b1d0 | N2Sh13FrameBehaviorE}"];
-
-	"node0x60200004b110" [label = "{address : 0x60200004b110 | N4YAGE12LayerDeleterE}"];
-
-	"node0x60200004b050" [label = "{address : 0x60200004b050 | N4YAGE10LayerAdderE}"];
+	"node0x603000034300" [label = "{address : 0x603000034300 | N2Sh10SelectableE}"];
 
 	"node0x60400003fd90" [label = "{address : 0x60400003fd90 | N2Sh14DialogBehaviorE}"];
 
-	"node0x602000048950" [label = "{address : 0x602000048950 | N4YAGE10MainPanels10ImageSaverE}"];
+	"node0x603000034210" [label = "{address : 0x603000034210 | N2Sh10SelectableE}"];
 
-	"node0x602000048ad0" [label = "{address : 0x602000048ad0 | N4YAGE10MainPanels11ImageOpenerE}"];
+	"node0x60200004b6f0" [label = "{address : 0x60200004b6f0 | N4YAGE16KeyboardListenerE}"];
+
+	"node0x60200004b350" [label = "{address : 0x60200004b350 | N2Sh13FrameBehaviorE}"];
+
+	"node0x60200004b1d0" [label = "{address : 0x60200004b1d0 | N4YAGE10LayerAdderE}"];
+
+	"node0x603000034000" [label = "{address : 0x603000034000 | N4YAGE15ToolSusceptibleE}"];
+
+	"node0x60200004b070" [label = "{address : 0x60200004b070 | N2Sh13FrameBehaviorE}"];
+
+	"node0x602000048970" [label = "{address : 0x602000048970 | N4YAGE10MainPanels10ImageSaverE}"];
 
 	"node0x603000031180" [label = "{address : 0x603000031180 | N2Sh10SelectableE}"];
 
-	"node0x6030000341e0" [label = "{address : 0x6030000341e0 | N2Sh12WindowCloserE}"];
+	"node0x60b000022640" [label = "{address : 0x60b000022640 | N4YAGE9HueSliderE}"];
 
-	"node0x60b000021d50" [label = "{address : 0x60b000021d50 | N4YAGE9HueSliderE}"];
+	"node0x60200004aed0" [label = "{address : 0x60200004aed0 | N2Sh13FrameBehaviorE}"];
 
-	"node0x60b000021a90" [label = "{address : 0x60b000021a90 | N4YAGE8SVSliderE}"];
+	"node0x60b000021d50" [label = "{address : 0x60b000021d50 | N4YAGE8SVSliderE}"];
 
-	"node0x603000033d30" [label = "{address : 0x603000033d30 | N4YAGE15ToolSusceptibleE}"];
+	"node0x602000048af0" [label = "{address : 0x602000048af0 | N4YAGE10MainPanels11ImageOpenerE}"];
 
-	"node0x603000030c40" [label = "{address : 0x603000030c40 | N2Sh10SelectableE}"];
+	"node0x602000048cd0" [label = "{address : 0x602000048cd0 | N2Sh13FrameBehaviorE}"];
 
-	"node0x60b000022380" [label = "{address : 0x60b000022380 | N4YAGE9HueSliderE}"];
+	"node0x60b000022850" [label = "{address : 0x60b000022850 | N4YAGE13IntPropPickerE}"];
 
-	"node0x60b0000220c0" [label = "{address : 0x60b0000220c0 | N4YAGE8SVSliderE}"];
-
-	"node0x602000048cb0" [label = "{address : 0x602000048cb0 | N2Sh13FrameBehaviorE}"];
-
-	"node0x60200004ad50" [label = "{address : 0x60200004ad50 | N2Sh13FrameBehaviorE}"];
-
-	"node0x603000033f40" [label = "{address : 0x603000033f40 | N2Sh10SelectableE}"];
-
-	"node0x60b000022590" [label = "{address : 0x60b000022590 | N4YAGE13IntPropPickerE}"];
+	"node0x60200004b290" [label = "{address : 0x60200004b290 | N4YAGE12LayerDeleterE}"];
 
 	"node0x603000030ee0" [label = "{address : 0x603000030ee0 | N2Sh10SelectableE}"];
 
-	"node0x60200004aef0" [label = "{address : 0x60200004aef0 | N2Sh13FrameBehaviorE}"];
+	"node0x603000031420" [label = "{address : 0x603000031420 | N2Sh10SelectableE}"];
+
+	"node0x60b000022010" [label = "{address : 0x60b000022010 | N4YAGE9HueSliderE}"];
+
+	"node0x603000030c40" [label = "{address : 0x603000030c40 | N2Sh10SelectableE}"];
+
+	"node0x60b000022380" [label = "{address : 0x60b000022380 | N4YAGE8SVSliderE}"];
 
 }

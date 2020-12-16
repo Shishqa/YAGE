@@ -32,7 +32,7 @@ namespace YAGE::ToolsPanel {
             for (size_t y = 0; y <= TOOL_MANAGER().getTools().size() / N_BUTTONS_IN_ROW; ++y) {
                 for (size_t x = 0; x < N_BUTTONS_IN_ROW; ++x) {
 
-                    if (curr_tool == TOOL_MANAGER().getTools().size() - 1) {
+                    if (curr_tool == TOOL_MANAGER().getTools().size()) {
                         break;
                     }
 

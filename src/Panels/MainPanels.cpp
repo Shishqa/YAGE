@@ -119,16 +119,37 @@ MainPanels::UpperMenu::UpperMenu(const Sh::Frame& frame)
 MainPanels::CanvasFrame::CanvasFrame(const Sh::Frame& frame)
     : Sh::UIFrame(frame) {
 
+    applyStyle<Sh::UIWindow::NORMAL>(
+        Sh::ColorFill(Sh::Color(100, 100, 100))
+    );
+
+    Sh::SubscriptionManager::subscribe<ImageUpdateEvent>(this, &IMAGE_MANAGER());
+    update();
+}
+
+void MainPanels::CanvasFrame::update() {
+
+    std::cout << "update!\n";
+
+    destroyChildren();
     attach<Canvas>(Sh::Frame{
         {40, 40},
         static_cast<Sh::Vector2<double>>(LAYER_MANAGER().getActiveLayer().size())
     });
     fit();
+}
 
-    applyStyle<Sh::UIWindow::NORMAL>(
-        Sh::ColorFill(Sh::Color(100, 100, 100))
-    );
+bool MainPanels::CanvasFrame::onEvent(Sh::Event& event) {
 
+    std::cout << "got event\n";
+
+    if (event.mask() != Sh::Event::getMask<ImageUpdateEvent>()) {
+        return Sh::UIFrame::onEvent(event);
+    }
+
+    update();
+
+    return true;
 }
 
 /*============================================================================*/

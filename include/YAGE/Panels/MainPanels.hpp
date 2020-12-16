@@ -49,6 +49,10 @@ namespace YAGE::MainPanels {
 
         explicit CanvasFrame(const Sh::Frame& frame);
 
+        void update();
+
+        bool onEvent(Sh::Event& event) override;
+
     };
 
     /*========================================================================*/

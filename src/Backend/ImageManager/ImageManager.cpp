@@ -70,9 +70,13 @@ void ImageManager::createImage(const Sh::Vector2<size_t>& size) {
     layerManager().clearLayers(size, Sh::Color::WHITE);
     layerManager().addLayer(Sh::Color::NONE);
     layerManager().setActiveLayer(1);
+
+    Sh::EventSystem::sendEvent<ImageUpdateEvent>(this);
 }
 
 void ImageManager::loadImage(const std::string_view& filename) {
+
+    std::cout << "loading image\n";
 
     image_path.emplace(filename);
 
@@ -80,11 +84,11 @@ void ImageManager::loadImage(const std::string_view& filename) {
         Sh::PLATFORM().loadContextFromImage(filename);
 
     layerManager().clearLayers(context->getSize(), Sh::Color::BLACK);
-    layerManager().addLayer(Sh::Color::NONE);
-
     context->paste(layerManager().getActiveLayer());
 
     delete context;
+
+    Sh::EventSystem::sendEvent<ImageUpdateEvent>(this);
 }
 
 bool ImageManager::saveImage() {

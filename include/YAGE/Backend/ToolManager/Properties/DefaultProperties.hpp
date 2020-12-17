@@ -58,6 +58,12 @@ namespace YAGE {
             return output;
         }
 
+        Sh::UIWindow* summonPicker(const Sh::Frame& frame) override;
+
+        uint8_t id() override {
+            return getId<ColorProp>();
+        }
+
         double h, s, v, a;
 
     };
@@ -78,6 +84,12 @@ namespace YAGE {
         void setValue(double new_value) {
             value = new_value;
             Sh::EventSystem::sendEvent<PropUpdateEvent>(this, this);
+        }
+
+        Sh::UIWindow* summonPicker(const Sh::Frame& frame) override;
+
+        uint8_t id() override {
+            return getId<FloatingPointProp>();
         }
 
     private:
@@ -104,6 +116,12 @@ namespace YAGE {
             Sh::EventSystem::sendEvent<PropUpdateEvent>(this, this);
         }
 
+        Sh::UIWindow* summonPicker(const Sh::Frame& frame) override;
+
+        uint8_t id() override {
+            return getId<IntProp>();
+        }
+
     private:
 
         int32_t value;
@@ -116,6 +134,11 @@ namespace YAGE {
                 : IntProp(val)
                 { }
 
+        uint8_t id() override {
+            return getId<BoolProp>();
+        }
+
+        Sh::UIWindow* summonPicker(const Sh::Frame& frame) override;
     };
 
 }

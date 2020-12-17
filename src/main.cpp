@@ -21,8 +21,7 @@ int main(int argc, char* argv[]) {
         1800, 1000
     };
 
-    auto app = Sh::WindowManager::create<YageApp>(Sh::Frame{{30, 50}, WIN_SIZE});
-    Sh::WindowManager::Root()->attach<Sh::UIDialog>(app);
+    Sh::SPAWN_DIALOG<YageApp>(Sh::Frame{{30, 50}, WIN_SIZE});
 
     Sh::WindowManager::Root()->attach<Sh::FpsLabel>(
             Sh::Frame{{0, 0}, {100, 50}}

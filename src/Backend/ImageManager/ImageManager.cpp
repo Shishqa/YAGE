@@ -76,9 +76,7 @@ void ImageManager::createImage(const Sh::Vector2<size_t>& size) {
 
 void ImageManager::loadImage(const std::string_view& filename) {
 
-    std::cout << "loading image\n";
-
-    image_path.emplace(filename);
+    image_path.reset();
 
     Sh::IPlatform::IContext* context =
         Sh::PLATFORM().loadContextFromImage(filename);

@@ -47,6 +47,8 @@ namespace YAGE::MainPanels {
     class CanvasFrame : public Sh::UIFrame {
     public:
 
+        static constexpr double SB_WIDTH = 15;
+
         explicit CanvasFrame(const Sh::Frame& frame);
 
         void update();

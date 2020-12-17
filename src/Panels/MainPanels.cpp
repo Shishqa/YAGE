@@ -10,12 +10,10 @@ MainPanels::ImageOpener::ImageOpener(Sh::UIWindow *target)
 
 void MainPanels::ImageOpener::reactOnRelease(Sh::MouseButtonEvent&) {
 
-    auto selector = Sh::WindowManager::create<Sh::UIFileSelector>(
+    auto selector = Sh::SPAWN_DIALOG<Sh::UIFileSelector>(
         Sh::Frame{ {30, 30}, {800, 600} },
-        "./"
+        "Open", "./"
         );
-
-    Sh::WindowManager::Root()->attach<Sh::UIDialog>(selector);
 
     Sh::SubscriptionManager::subscribe<Sh::FileSelectEvent>(this, selector);
 }
@@ -45,12 +43,11 @@ void MainPanels::ImageSaver::reactOnRelease(Sh::MouseButtonEvent&) {
         return;
     }
 
-    auto selector = Sh::WindowManager::create<Sh::UIFileSelector>(
+    auto selector = Sh::SPAWN_DIALOG<Sh::UIFileSelector>(
         Sh::Frame{ {30, 30}, {800, 600} },
-        "./"
+        "Save", "./"
     );
 
-    Sh::WindowManager::Root()->attach<Sh::UIDialog>(selector);
     Sh::SubscriptionManager::subscribe<Sh::FileSelectEvent>(this, selector);
 }
 
@@ -117,7 +114,7 @@ MainPanels::UpperMenu::UpperMenu(const Sh::Frame& frame)
 /*----------------------------------------------------------------------------*/
 
 MainPanels::CanvasFrame::CanvasFrame(const Sh::Frame& frame)
-    : Sh::UIFrame(frame) {
+    : Sh::UIFrame(frame, SB_WIDTH) {
 
     applyStyle<Sh::UIWindow::NORMAL>(
         Sh::ColorFill(Sh::Color(100, 100, 100))
@@ -129,19 +126,23 @@ MainPanels::CanvasFrame::CanvasFrame(const Sh::Frame& frame)
 
 void MainPanels::CanvasFrame::update() {
 
-    std::cout << "update!\n";
-
     destroyChildren();
-    attach<Canvas>(Sh::Frame{
-        {40, 40},
+
+    auto canvas_size =
+        static_cast<Sh::Vector2<double>>(LAYER_MANAGER().getActiveLayer().size());
+
+    auto bg = attach<Sh::UIWindow>(Sh::Frame{
+        {0, 0}, canvas_size + Sh::Vector2<double>{100 + SB_WIDTH, 100 + SB_WIDTH}
+    });
+
+    bg->attach<Canvas>(Sh::Frame{
+        {50, 50},
         static_cast<Sh::Vector2<double>>(LAYER_MANAGER().getActiveLayer().size())
     });
     fit();
 }
 
 bool MainPanels::CanvasFrame::onEvent(Sh::Event& event) {
-
-    std::cout << "got event\n";
 
     if (event.mask() != Sh::Event::getMask<ImageUpdateEvent>()) {
         return Sh::UIFrame::onEvent(event);

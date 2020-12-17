@@ -62,16 +62,16 @@ namespace YAGE {
 
             attach<ColorPicker>(Sh::Frame{
                 {0, 230},
-                {125, 200}
+                {125, 140}
             }, &GlobalColorManager::PrimaryColor());
 
             attach<ColorPicker>(Sh::Frame{
                 {125, 230},
-                {125, 200}
+                {125, 140}
             }, &GlobalColorManager::SecondaryColor());
 
             attach<PropertyList>(Sh::Frame{
-                {0, 430},
+                {0, 370},
                 {250, frame.size.y - 230}
             })->applyStyle<Sh::UIWindow::NORMAL>(
                 Sh::ColorFill{ Sh::Color(70, 70, 100) }

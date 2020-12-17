@@ -1,10 +1,9 @@
 /*============================================================================*/
-#ifndef YAGE_THICKNESSPICKER_HPP
-#define YAGE_THICKNESSPICKER_HPP
+#ifndef YAGE_NUMBERPICKERS_HPP
+#define YAGE_NUMBERPICKERS_HPP
 /*============================================================================*/
 #include "Slidable.hpp"
 #include "Stroke.hpp"
-#include "ToolManager.hpp"
 /*============================================================================*/
 namespace YAGE {
 
@@ -103,5 +102,5 @@ namespace YAGE {
 
 }
 /*============================================================================*/
-#endif //YAGE_THICKNESSPICKER_HPP
+#endif //YAGE_NUMBERPICKERS_HPP
 /*============================================================================*/

@@ -47,7 +47,26 @@ namespace YAGE {
 
     class PluginPropContainer : public Property {
     public:
+
+        explicit PluginPropContainer(PluginManager::PluginToken* plugin);
+
+        Sh::UIWindow* summonPicker(const Sh::Frame &frame) override;
+
+        ~PluginPropContainer() override;
+
+        uint8_t id() override {
+            return getId<PluginPropContainer>();
+        }
+
+        void getProps();
+
+        void setProps();
+
         std::unordered_map<PluginAPI::TYPE::Type, Property*> props;
+
+    private:
+
+        PluginManager::PluginToken* token;
     };
 
     class PluginTool : public Tool {
@@ -61,9 +80,9 @@ namespace YAGE {
 
         void stopApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override;
 
-        void setProps();
-
         void getProps();
+
+        void setProps();
 
         [[nodiscard]]
         std::string_view getIcon() const override;

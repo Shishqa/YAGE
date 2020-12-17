@@ -41,7 +41,7 @@ void LayerList::update() {
 
         auto button = attach<Sh::UIButton<Sh::Selectable>>(
             Sh::Frame{ {0, static_cast<double>(layer) * BUTTON_HEIGHT},
-                       {getFrame().size.x, BUTTON_HEIGHT} },
+                       {getFrame().size.x - SB_WIDTH, BUTTON_HEIGHT} },
             layer
             );
         button->applyStyle<Sh::UIWindow::NORMAL>(

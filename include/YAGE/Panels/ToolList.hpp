@@ -48,28 +48,34 @@ namespace YAGE::ToolsPanel {
                             curr_tool);
                     selector->applyStyle<Sh::UIWindow::NORMAL>(
                                     Sh::Bordered{TOOL_BORDER, Sh::Color::BLACK},
+                                    Sh::Bordered{TOOL_BORDER, Sh::Color::WHITE},
                                     Sh::ColorFill{Sh::Color::WHITE},
                                     Sh::TextureFill{TOOL_MANAGER().getTool(curr_tool).getIcon()}
                             )
                             ->applyStyle<Sh::UIWindow::HOVER>(
                                     Sh::Bordered{TOOL_BORDER, Sh::Color::BEIGE},
+                                    Sh::Bordered{TOOL_BORDER, Sh::Color::WHITE},
                                     Sh::ColorFill{Sh::Color::WHITE},
                                     Sh::TextureFill{TOOL_MANAGER().getTool(curr_tool).getIcon()}
                             )
                             ->applyStyle<Sh::UIWindow::SELECTED>(
                                     Sh::Bordered{TOOL_BORDER, Sh::Color::RED},
+                                    Sh::Bordered{TOOL_BORDER, Sh::Color::WHITE},
                                     Sh::ColorFill{Sh::Color::WHITE},
                                     Sh::TextureFill{TOOL_MANAGER().getTool(curr_tool).getIcon()}
                             );
 
-                    ++curr_tool;
-
                     Sh::SubscriptionManager::subscribe<Sh::UISelectEvent>(this, selector);
                     Sh::SubscriptionManager::subscribe<Sh::UISelectEvent>(selector->as<Sh::Selectable>(), this);
+
+                    if (&TOOL_MANAGER().getTool(curr_tool) == &TOOL_MANAGER().activeTool()) {
+                        Sh::EventSystem::sendEvent<Sh::UISelectEvent>(this, curr_tool);
+                    }
+
+                    ++curr_tool;
                 }
             }
 
-            Sh::EventSystem::sendEvent<ToolSelectEvent>(this, &TOOL_MANAGER().activeTool());
         }
 
         void onSelect(int option) override {

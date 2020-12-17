@@ -53,28 +53,8 @@ namespace YAGE {
                 {frame.size.x, 30}
             });
 
-            attach<ToolsPanel::ToolList>(Sh::Frame{
-                {0, 30},
-                {250, 200}
-            })->applyStyle(
-                Sh::ColorFill{ Sh::Color(70, 70, 100) }, Sh::UIWindow::ALL
-                );
-
-            attach<ColorPicker>(Sh::Frame{
-                {0, 230},
-                {125, 140}
-            }, &GlobalColorManager::PrimaryColor());
-
-            attach<ColorPicker>(Sh::Frame{
-                {125, 230},
-                {125, 140}
-            }, &GlobalColorManager::SecondaryColor());
-
-            attach<PropertyList>(Sh::Frame{
-                {0, 370},
-                {250, frame.size.y - 230}
-            })->applyStyle(
-                Sh::ColorFill{ Sh::Color(70, 70, 100) }, Sh::UIWindow::ALL
+            attach<MainPanels::LeftPanel>(
+                Sh::Frame{{0, 30}, {250, frame.size.y - 30}}
                 );
 
             attach<MainPanels::CanvasFrame>(Sh::Frame{
@@ -85,7 +65,7 @@ namespace YAGE {
             attach<MainPanels::AsidePanel>(Sh::Frame{
                 {frame.size.x - 100, 30},
                 {100, frame.size.y - 30}
-            })->applyStyle(
+                })->applyStyle(
                 Sh::ColorFill{ Sh::Color(70, 70, 100) }, Sh::UIWindow::ALL
                 );
 

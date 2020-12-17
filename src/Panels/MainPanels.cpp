@@ -1,5 +1,7 @@
 /*============================================================================*/
 #include "MainPanels.hpp"
+#include "ToolList.hpp"
+#include "PropertyList.hpp"
 /*============================================================================*/
 using namespace YAGE;
 /*============================================================================*/
@@ -78,7 +80,7 @@ MainPanels::UpperMenu::UpperMenu(const Sh::Frame& frame)
             Sh::ColorFill(Sh::Color(38, 38, 38)), Sh::UIWindow::NORMAL,
             Sh::ColorFill(Sh::Color(70, 70, 70)), Sh::UIWindow::HOVER,
             Sh::ColorFill(Sh::Color(60, 60, 70)), Sh::UIWindow::CLICK,
-            Sh::StaticLabel("Save", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER),
+            Sh::StaticLabel("Save", Sh::Color::GHOST_WHITE, 16, Sh::Text::Align::CENTER),
                 Sh::UIWindow::ALL
         );
 
@@ -90,7 +92,7 @@ MainPanels::UpperMenu::UpperMenu(const Sh::Frame& frame)
         Sh::ColorFill(Sh::Color(38, 38, 38)), Sh::UIWindow::NORMAL,
         Sh::ColorFill(Sh::Color(70, 70, 70)), Sh::UIWindow::HOVER,
         Sh::ColorFill(Sh::Color(60, 60, 70)), Sh::UIWindow::CLICK,
-        Sh::StaticLabel("Open", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER),
+        Sh::StaticLabel("Open", Sh::Color::GHOST_WHITE, 16, Sh::Text::Align::CENTER),
         Sh::UIWindow::ALL
     );
 
@@ -98,6 +100,23 @@ MainPanels::UpperMenu::UpperMenu(const Sh::Frame& frame)
         Sh::ColorFill(Sh::Color(38, 38, 38)), Sh::UIWindow::ALL
     );
 
+}
+
+/*----------------------------------------------------------------------------*/
+
+MainPanels::LeftPanel::LeftPanel(const Sh::Frame& frame)
+        : Sh::UIWindow(frame) {
+
+    attach<ToolList>(Sh::Frame{{5, 5}, {frame.size.x - 10, 115}});
+
+    attach<GeneralColorPicker>(Sh::Frame{ {5, 125}, {frame.size.x - 10, 165} });
+
+    attach<PropertyList>(Sh::Frame{
+        {5, 295},
+        {frame.size.x - 10, frame.size.y - 300}
+    });
+
+    applyStyle(Sh::ColorFill(Sh::Color(70, 70, 100)), Sh::UIWindow::ALL);
 }
 
 /*----------------------------------------------------------------------------*/

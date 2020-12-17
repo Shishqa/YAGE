@@ -66,7 +66,9 @@ namespace YAGE {
                 Sh::Frame{ {10, 10}, {(frame.size.x - 30) / 2, 30} }
                 );
             adder->applyStyle(
-                Sh::ColorFill{ Sh::Color(70, 140, 70) }, Sh::UIWindow::ALL,
+                Sh::ColorFill{ Sh::Color(70, 140, 70) }, Sh::UIWindow::NORMAL,
+                Sh::ColorFill{ Sh::Color(70, 160, 70) }, Sh::UIWindow::HOVER,
+                Sh::ColorFill{ Sh::Color(70, 145, 70) }, Sh::UIWindow::CLICK,
                 Sh::Label("+", Sh::Color::BLACK, 20, Sh::Text::Align::CENTER), Sh::UIWindow::ALL
                 );
 
@@ -74,7 +76,9 @@ namespace YAGE {
                 Sh::Frame{ {(frame.size.x - 30) / 2 + 20, 10}, {(frame.size.x - 30) / 2, 30} }
             );
             deleter->applyStyle(
-                Sh::ColorFill{ Sh::Color(140, 70, 70) }, Sh::UIWindow::ALL,
+                Sh::ColorFill{ Sh::Color(140, 70, 70) }, Sh::UIWindow::NORMAL,
+                Sh::ColorFill{ Sh::Color(160, 70, 70) }, Sh::UIWindow::HOVER,
+                Sh::ColorFill{ Sh::Color(145, 70, 70) }, Sh::UIWindow::CLICK,
                 Sh::Label("-", Sh::Color::BLACK, 20, Sh::Text::Align::CENTER), Sh::UIWindow::ALL
             );
 

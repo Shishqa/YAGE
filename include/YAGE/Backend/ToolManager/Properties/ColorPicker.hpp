@@ -12,9 +12,8 @@
 #include "Behaviors.hpp"
 #include "Styles.hpp"
 #include "GUI.hpp"
-#include "ToolManager.hpp"
 #include "Stroke.hpp"
-#include "ThicknessPicker.hpp"
+#include "NumberPickers.hpp"
 /*============================================================================*/
 namespace YAGE {
 

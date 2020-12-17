@@ -23,7 +23,8 @@ ToolSusceptible::ToolSusceptible(Sh::UIWindow *target)
 void ToolSusceptible::updateTarget() {
     auto target_canvas = target<Canvas>();
     if (target_canvas) {
-        target_canvas->canvas.fill(static_cast<Sh::Color>(GlobalColorManager::SecondaryColor()));
+        //target_canvas->canvas.fill(static_cast<Sh::Color>(GlobalColorManager::SecondaryColor()));
+        target_canvas->canvas.fill(Sh::Color::NONE);
         LAYER_MANAGER().displayTo(target_canvas->canvas);
     }
 }

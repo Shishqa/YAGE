@@ -62,7 +62,7 @@ namespace YAGE {
     class ImageUpdateEvent : public Sh::Event {
     public:
         Mask mask() override {
-            return Sh::Event::getMask<LayersUpdateEvent>();
+            return Sh::Event::getMask<ImageUpdateEvent>();
         }
     };
 

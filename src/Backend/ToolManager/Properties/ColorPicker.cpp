@@ -3,7 +3,6 @@
 #include "Convert.hpp"
 #include "UISlider.hpp"
 #include "ColorFill.hpp"
-#include "ToolManager.hpp"
 #include "Stroke.hpp"
 #include "Bordered.hpp"
 /*============================================================================*/

@@ -3,6 +3,7 @@
 #define YAGE_IPROPERTY_HPP
 /*============================================================================*/
 #include <cstdint>
+#include "UIWindow.hpp"
 #include "EventSystem.hpp"
 /*============================================================================*/
 namespace YAGE {
@@ -15,6 +16,10 @@ namespace YAGE {
             static uint8_t ID = getUniqueId();
             return ID;
         }
+
+        virtual uint8_t id() = 0;
+
+        virtual Sh::UIWindow* summonPicker(const Sh::Frame& frame) = 0;
 
         ~Property() override = default;
 

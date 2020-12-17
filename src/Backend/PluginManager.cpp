@@ -25,6 +25,10 @@ bool PluginManager::initPlugins() {
             return false;
         }
 
+        if (Plugins().count(handle)) {
+            throw 1;
+        }
+
         get = reinterpret_cast<Plugin* (*)()>(dlsym(handle, "get_plugin"));
         if (!get) {
             printf("%s\n", dlerror());
@@ -34,11 +38,12 @@ bool PluginManager::initPlugins() {
 
         new_plugin->init();
 
-        Plugins()[handle] = new PluginToken{ new_plugin, plug["icon path"].get<std::string>() };
+        auto token = new PluginToken{ new_plugin, plug["icon path"].get<std::string>() };
 
         std::cout << "adding " << plug["path"] << "\n";
 
-        TOOL_MANAGER().addTool<PluginTool>(Plugins()[handle]);
+        TOOL_MANAGER().addTool<PluginTool>(token);
+        Plugins()[handle] = token;
     }
 
     return true;
@@ -53,12 +58,9 @@ bool PluginManager::finalizePlugins() {
 
         delete plugin.second;
     }
-
     Plugins().clear();
 
     return true;
 }
-
-/*============================================================================*/
 
 /*============================================================================*/

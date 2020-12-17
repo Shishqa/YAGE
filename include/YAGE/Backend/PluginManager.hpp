@@ -80,10 +80,6 @@ namespace YAGE {
 
         void stopApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override;
 
-        void getProps();
-
-        void setProps();
-
         [[nodiscard]]
         std::string_view getIcon() const override;
 

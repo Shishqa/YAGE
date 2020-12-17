@@ -51,7 +51,8 @@ bool ToolSusceptible::onMouseButton(Sh::MouseButtonEvent& event) {
             );
 
     } else if (event.state() == Sh::Mouse::UP &&
-               event.button() == Sh::Mouse::LEFT) {
+               event.button() == Sh::Mouse::LEFT &&
+               applying_tool) {
 
         applying_tool = false;
         TOOL_MANAGER().activeTool().stopApplying(

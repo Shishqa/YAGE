@@ -36,6 +36,8 @@ PluginPropContainer::PluginPropContainer(PluginManager::PluginToken* plugin)
                 Sh::LogSystem::printWarning("Unsupported display type");
         }
     }
+
+    setProps();
 }
 
 PluginPropContainer::~PluginPropContainer() {
@@ -48,8 +50,7 @@ Sh::UIWindow* PluginPropContainer::summonPicker(const Sh::Frame &frame) {
 
     auto container = Sh::WindowManager::create<Sh::UIFrame>(frame);
 
-    double offset = 5;
-
+    double offset = 0;
     for (auto& prop : props) {
 
         auto picker = prop.second->summonPicker(
@@ -116,6 +117,8 @@ void PluginPropContainer::setProps() {
 
 void PluginPropContainer::getProps() {
 
+    std::cout << "getting props\n";
+
     for (auto& prop : token->impl->properties) {
 
         if (PluginAPI::TYPE::PRIMARY_COLOR == prop.first) {
@@ -159,67 +162,32 @@ PluginTool::PluginTool(PluginManager::PluginToken* plugin)
     : token(plugin) {
 
     addProperty<PluginPropContainer>(plugin);
-    setProps();
 }
 
 /*----------------------------------------------------------------------------*/
 
 void PluginTool::startApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) {
-    setProps();
+    getProperty<PluginPropContainer>().setProps();
     token->impl->start_apply(
-        PluginAPI::Canvas{ img.getData(), img.size().x, img.size().y },
+        PluginAPI::Canvas{ img.getData(), img.size().y, img.size().x },
         PluginAPI::Position{ pos.x, pos.y }
     );
 }
 
 void PluginTool::update(Sh::Image& img,const Sh::Vector2<int64_t>& pos) {
     token->impl->apply(
-        PluginAPI::Canvas{ img.getData(), img.size().x, img.size().y },
+        PluginAPI::Canvas{ img.getData(), img.size().y, img.size().x },
         PluginAPI::Position{ pos.x, pos.y }
     );
 }
 
 void PluginTool::stopApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) {
     token->impl->stop_apply(
-        PluginAPI::Canvas{ img.getData(), img.size().x, img.size().y },
+        PluginAPI::Canvas{ img.getData(), img.size().y, img.size().x },
         PluginAPI::Position{ pos.x, pos.y }
     );
-    getProps();
-}
-
-/*----------------------------------------------------------------------------*/
-
-void PluginTool::setProps() {
-
-    for (auto& prop : token->impl->properties) {
-
-        switch (prop.first) {
-
-
-
-        }
-    }
-
-    getProperty<PluginPropContainer>().setProps();
-}
-
-/*----------------------------------------------------------------------------*/
-
-void PluginTool::getProps() {
-
-    for (auto& prop : token->impl->properties) {
-
-        switch (prop.first) {
-
-
-
-        }
-    }
-
     getProperty<PluginPropContainer>().getProps();
 }
-
-/*----------------------------------------------------------------------------*/
 
 std::string_view PluginTool::getIcon() const {
     return token->icon_path;

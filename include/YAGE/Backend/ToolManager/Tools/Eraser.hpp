@@ -11,7 +11,6 @@ namespace YAGE::Tools {
 
         Eraser() : Pencil() {
             addProperty<Thickness>(20);
-            addProperty<IntProp>(20);
         }
 
         void startApplying(Sh::Image& img, const Sh::Vector2<int64_t>& pos) override {

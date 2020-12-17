@@ -46,23 +46,13 @@ namespace YAGE::ToolsPanel {
                                 BUTTON_SIZE
                                 },
                             curr_tool);
-                    selector->applyStyle<Sh::UIWindow::NORMAL>(
-                                    Sh::Bordered{TOOL_BORDER, Sh::Color::BLACK},
-                                    Sh::Bordered{TOOL_BORDER, Sh::Color::WHITE},
-                                    Sh::ColorFill{Sh::Color::WHITE},
-                                    Sh::TextureFill{TOOL_MANAGER().getTool(curr_tool).getIcon()}
-                            )
-                            ->applyStyle<Sh::UIWindow::HOVER>(
-                                    Sh::Bordered{TOOL_BORDER, Sh::Color::BEIGE},
-                                    Sh::Bordered{TOOL_BORDER, Sh::Color::WHITE},
-                                    Sh::ColorFill{Sh::Color::WHITE},
-                                    Sh::TextureFill{TOOL_MANAGER().getTool(curr_tool).getIcon()}
-                            )
-                            ->applyStyle<Sh::UIWindow::SELECTED>(
-                                    Sh::Bordered{TOOL_BORDER, Sh::Color::RED},
-                                    Sh::Bordered{TOOL_BORDER, Sh::Color::WHITE},
-                                    Sh::ColorFill{Sh::Color::WHITE},
-                                    Sh::TextureFill{TOOL_MANAGER().getTool(curr_tool).getIcon()}
+                    selector->applyStyle(
+                                    Sh::Bordered{TOOL_BORDER, Sh::Color::BLACK}, Sh::UIWindow::NORMAL,
+                                    Sh::Bordered{TOOL_BORDER, Sh::Color::BEIGE}, Sh::UIWindow::HOVER,
+                                    Sh::Bordered{TOOL_BORDER, Sh::Color::RED}, Sh::UIWindow::SELECTED,
+                                    Sh::Bordered{TOOL_BORDER, Sh::Color::WHITE}, Sh::UIWindow::ALL,
+                                    Sh::ColorFill{Sh::Color::WHITE}, Sh::UIWindow::ALL,
+                                    Sh::TextureFill{TOOL_MANAGER().getTool(curr_tool).getIcon()}, Sh::UIWindow::ALL
                             );
 
                     Sh::SubscriptionManager::subscribe<Sh::UISelectEvent>(this, selector);

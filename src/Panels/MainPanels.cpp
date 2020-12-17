@@ -74,39 +74,28 @@ MainPanels::UpperMenu::UpperMenu(const Sh::Frame& frame)
         Sh::Frame{ {0, 0}, {70, frame.size.y} }
     );
 
-    saver->applyStyle<Sh::UIWindow::NORMAL>(
-            Sh::ColorFill(Sh::Color(38, 38, 38)),
-            Sh::StaticLabel("Save", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER)
-        )
-        ->applyStyle<Sh::UIWindow::HOVER>(
-            Sh::ColorFill(Sh::Color(70, 70, 70)),
-            Sh::StaticLabel("Save", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER)
-        )
-        ->applyStyle<Sh::UIWindow::CLICK>(
-            Sh::ColorFill(Sh::Color(60, 60, 70)),
-            Sh::StaticLabel("Save", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER)
+    saver->applyStyle(
+            Sh::ColorFill(Sh::Color(38, 38, 38)), Sh::UIWindow::NORMAL,
+            Sh::ColorFill(Sh::Color(70, 70, 70)), Sh::UIWindow::HOVER,
+            Sh::ColorFill(Sh::Color(60, 60, 70)), Sh::UIWindow::CLICK,
+            Sh::StaticLabel("Save", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER),
+                Sh::UIWindow::ALL
         );
-
 
     auto opener = attach<Sh::UIButton<ImageOpener>>(
         Sh::Frame{ {75, 0}, {70, frame.size.y} }
     );
 
-    opener->applyStyle<Sh::UIWindow::NORMAL>(
-            Sh::ColorFill(Sh::Color(38, 38, 38)),
-            Sh::StaticLabel("Open", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER)
-        )
-        ->applyStyle<Sh::UIWindow::HOVER>(
-            Sh::ColorFill(Sh::Color(70, 70, 70)),
-            Sh::StaticLabel("Open", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER)
-        )
-        ->applyStyle<Sh::UIWindow::CLICK>(
-            Sh::ColorFill(Sh::Color(60, 60, 70)),
-            Sh::StaticLabel("Open", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER)
-        );
+    opener->applyStyle(
+        Sh::ColorFill(Sh::Color(38, 38, 38)), Sh::UIWindow::NORMAL,
+        Sh::ColorFill(Sh::Color(70, 70, 70)), Sh::UIWindow::HOVER,
+        Sh::ColorFill(Sh::Color(60, 60, 70)), Sh::UIWindow::CLICK,
+        Sh::StaticLabel("Open", Sh::Color::GHOST_WHITE, 20, Sh::Text::Align::CENTER),
+        Sh::UIWindow::ALL
+    );
 
-    applyStyle<Sh::UIWindow::NORMAL>(
-        Sh::ColorFill(Sh::Color(38, 38, 38))
+    applyStyle(
+        Sh::ColorFill(Sh::Color(38, 38, 38)), Sh::UIWindow::ALL
     );
 
 }
@@ -116,8 +105,8 @@ MainPanels::UpperMenu::UpperMenu(const Sh::Frame& frame)
 MainPanels::CanvasFrame::CanvasFrame(const Sh::Frame& frame)
     : Sh::UIFrame(frame, SB_WIDTH) {
 
-    applyStyle<Sh::UIWindow::NORMAL>(
-        Sh::ColorFill(Sh::Color(100, 100, 100))
+    applyStyle(
+        Sh::ColorFill(Sh::Color(100, 100, 100)), Sh::UIWindow::ALL
     );
 
     Sh::SubscriptionManager::subscribe<ImageUpdateEvent>(this, &IMAGE_MANAGER());

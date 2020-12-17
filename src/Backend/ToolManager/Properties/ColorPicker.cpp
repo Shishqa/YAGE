@@ -50,9 +50,9 @@ YAGE::HuePicker::HuePicker(const Sh::Frame& frame, ColorProp* to_track)
     auto slider = attach<Sh::UIHorizontalSlider<HueSlider>>(
             Sh::Frame{ {0, 0}, frame.size }, 10, color
             );
-    slider->slider->applyStyle<Sh::UIWindow::NORMAL>(
-                    Sh::Bordered{2, Sh::Color::BLACK},
-                    Sh::ColorFill{Sh::Color::WHITE}
+    slider->slider->applyStyle(
+                    Sh::Bordered{2, Sh::Color::BLACK}, Sh::UIWindow::ALL,
+                    Sh::ColorFill{Sh::Color::WHITE}, Sh::UIWindow::ALL
                     );
 
     slider->slider->as<HueSlider>()->onPropUpdate();
@@ -85,9 +85,9 @@ SVPicker::SVPicker(const Sh::Frame& frame, ColorProp* to_track)
             Sh::Frame{{0, 0}, frame.size}, Sh::Vector2<double>{10, 10},
             color
             );
-    slider->slider->applyStyle<Sh::UIWindow::NORMAL>(
-                    Sh::Bordered{2, Sh::Color::BLACK},
-                    Sh::ColorFill{Sh::Color::WHITE}
+    slider->slider->applyStyle(
+                    Sh::Bordered{2, Sh::Color::BLACK}, Sh::UIWindow::ALL,
+                    Sh::ColorFill{Sh::Color::WHITE}, Sh::UIWindow::ALL
                     );
 
     slider->slider->as<SVSlider>()->onPropUpdate();
@@ -151,8 +151,8 @@ ColorPicker::ColorPicker(const Sh::Frame &frame,
         to_track
     );
 
-    applyStyle<Sh::UIWindow::NORMAL>(
-        Sh::ColorFill{Sh::Color(38, 38, 38)}
+    applyStyle(
+        Sh::ColorFill{Sh::Color(38, 38, 38)}, Sh::UIWindow::ALL
     );
 }
 

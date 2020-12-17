@@ -65,17 +65,17 @@ namespace YAGE {
             auto adder = attach<Sh::UIButton<LayerAdder>>(
                 Sh::Frame{ {10, 10}, {(frame.size.x - 30) / 2, 30} }
                 );
-            adder->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color(70, 140, 70) },
-                Sh::Label("+", Sh::Color::BLACK, 20, Sh::Text::Align::CENTER)
+            adder->applyStyle(
+                Sh::ColorFill{ Sh::Color(70, 140, 70) }, Sh::UIWindow::ALL,
+                Sh::Label("+", Sh::Color::BLACK, 20, Sh::Text::Align::CENTER), Sh::UIWindow::ALL
                 );
 
             auto deleter = attach<Sh::UIButton<LayerDeleter>>(
                 Sh::Frame{ {(frame.size.x - 30) / 2 + 20, 10}, {(frame.size.x - 30) / 2, 30} }
             );
-            deleter->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color(140, 70, 70) },
-                Sh::Label("-", Sh::Color::BLACK, 20, Sh::Text::Align::CENTER)
+            deleter->applyStyle(
+                Sh::ColorFill{ Sh::Color(140, 70, 70) }, Sh::UIWindow::ALL,
+                Sh::Label("-", Sh::Color::BLACK, 20, Sh::Text::Align::CENTER), Sh::UIWindow::ALL
             );
 
             auto list = attach<LayerList>(Sh::Frame{

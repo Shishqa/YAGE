@@ -42,6 +42,12 @@ namespace YAGE::MainPanels {
 
     };
 
+    class LeftPanel : public Sh::UIWindow {
+    public:
+
+        explicit LeftPanel(const Sh::Frame& frame);
+    };
+
     /*========================================================================*/
 
     class CanvasFrame : public Sh::UIFrame {

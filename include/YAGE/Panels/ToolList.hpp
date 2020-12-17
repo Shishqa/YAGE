@@ -11,7 +11,7 @@
 #include "SessionManager.hpp"
 #include "UISelectList.hpp"
 /*============================================================================*/
-namespace YAGE::ToolsPanel {
+namespace YAGE {
 
     //////////////////////////////////////////////////////////
     static constexpr Sh::Vector2<double> BUTTON_SIZE{42, 42};
@@ -65,6 +65,10 @@ namespace YAGE::ToolsPanel {
                     ++curr_tool;
                 }
             }
+
+            applyStyle(
+                Sh::ColorFill(Sh::Color(30, 30, 40)), Sh::UIWindow::ALL
+            );
 
         }
 

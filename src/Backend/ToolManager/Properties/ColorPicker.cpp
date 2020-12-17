@@ -151,9 +151,6 @@ ColorPicker::ColorPicker(const Sh::Frame &frame,
         to_track
     );
 
-    applyStyle(
-        Sh::ColorFill{Sh::Color(38, 38, 38)}, Sh::UIWindow::ALL
-    );
 }
 
 /*============================================================================*/

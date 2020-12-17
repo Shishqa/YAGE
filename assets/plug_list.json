@@ -16,5 +16,11 @@
     "version" : "1.0",
     "path" : "plugins/ColorFilter/ColorFilter.so",
     "icon path" : "plugins/ColorFilter/icon.png"
+  },
+  {
+    "name" : "Contrast",
+    "version" : "1.0",
+    "path" : "plugins/Contrast/Contrast.so",
+    "icon path" : "plugins/Contrast/icon.png"
   }
 ]

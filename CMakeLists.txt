@@ -98,4 +98,8 @@ add_subdirectory(src)
 add_subdirectory(src/Backend)
 add_subdirectory(src/ColorUtils)
 add_subdirectory(src/Panels)
+
 add_subdirectory(../00_ShishGL ShishGL)
+
+add_subdirectory(plugins/UnsharpMask)
+add_subdirectory(plugins/Contrast)

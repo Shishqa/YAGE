@@ -117,8 +117,6 @@ void PluginPropContainer::setProps() {
 
 void PluginPropContainer::getProps() {
 
-    std::cout << "getting props\n";
-
     for (auto& prop : token->impl->properties) {
 
         if (PluginAPI::TYPE::PRIMARY_COLOR == prop.first) {

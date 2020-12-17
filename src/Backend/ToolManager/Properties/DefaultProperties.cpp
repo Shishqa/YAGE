@@ -22,12 +22,12 @@ Sh::UIWindow* IntProp::summonPicker(const Sh::Frame &frame) {
     );
     slider->slider->as<IntPropPicker>()->onPropUpdate();
 
-    slider->applyStyle<Sh::UIWindow::NORMAL>(
-        Sh::ColorFill{Sh::Color(50, 50, 50)}
+    slider->applyStyle(
+        Sh::ColorFill{Sh::Color(50, 50, 50)}, Sh::UIWindow::ALL
     );
 
-    slider->slider->applyStyle<Sh::UIWindow::NORMAL>(
-        Sh::ColorFill{Sh::Color(200, 200, 240)}
+    slider->slider->applyStyle(
+        Sh::ColorFill{Sh::Color(200, 200, 240)}, Sh::UIWindow::ALL
     );
 
     return slider;
@@ -40,12 +40,12 @@ Sh::UIWindow* FloatingPointProp::summonPicker(const Sh::Frame &frame) {
     );
     slider->slider->as<IntPropPicker>()->onPropUpdate();
 
-    slider->applyStyle<Sh::UIWindow::NORMAL>(
-        Sh::ColorFill{Sh::Color(50, 50, 50)}
+    slider->applyStyle(
+        Sh::ColorFill{Sh::Color(50, 50, 50)}, Sh::UIWindow::ALL
     );
 
-    slider->slider->applyStyle<Sh::UIWindow::NORMAL>(
-        Sh::ColorFill{Sh::Color(200, 200, 240)}
+    slider->slider->applyStyle(
+        Sh::ColorFill{Sh::Color(200, 200, 240)}, Sh::UIWindow::ALL
     );
 
     return slider;
@@ -55,7 +55,7 @@ Sh::UIWindow* BoolProp::summonPicker(const Sh::Frame& frame) {
     return Sh::WindowManager::create<Sh::UIWindow>(
         Sh::Frame{ frame.pos, {20, 20} }
         )
-        ->applyStyle<Sh::UIWindow::NORMAL>(
-            Sh::ColorFill(Sh::Color::MAGENTA)
+        ->applyStyle(
+            Sh::ColorFill(Sh::Color::MAGENTA), Sh::UIWindow::ALL
             );
 }

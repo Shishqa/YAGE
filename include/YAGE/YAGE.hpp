@@ -56,8 +56,8 @@ namespace YAGE {
             attach<ToolsPanel::ToolList>(Sh::Frame{
                 {0, 30},
                 {250, 200}
-            })->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color(70, 70, 100) }
+            })->applyStyle(
+                Sh::ColorFill{ Sh::Color(70, 70, 100) }, Sh::UIWindow::ALL
                 );
 
             attach<ColorPicker>(Sh::Frame{
@@ -73,8 +73,8 @@ namespace YAGE {
             attach<PropertyList>(Sh::Frame{
                 {0, 370},
                 {250, frame.size.y - 230}
-            })->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color(70, 70, 100) }
+            })->applyStyle(
+                Sh::ColorFill{ Sh::Color(70, 70, 100) }, Sh::UIWindow::ALL
                 );
 
             attach<MainPanels::CanvasFrame>(Sh::Frame{
@@ -85,8 +85,8 @@ namespace YAGE {
             attach<MainPanels::AsidePanel>(Sh::Frame{
                 {frame.size.x - 100, 30},
                 {100, frame.size.y - 30}
-            })->applyStyle<Sh::UIWindow::NORMAL>(
-                Sh::ColorFill{ Sh::Color(70, 70, 100) }
+            })->applyStyle(
+                Sh::ColorFill{ Sh::Color(70, 70, 100) }, Sh::UIWindow::ALL
                 );
 
             setBehavior<KeyboardListener>();

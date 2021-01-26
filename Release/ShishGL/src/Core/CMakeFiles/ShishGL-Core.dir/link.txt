@@ -1,0 +1,2 @@
+/usr/bin/ar qc libShishGL-Core.a CMakeFiles/ShishGL-Core.dir/CoreApplication.cpp.o
+/usr/bin/ranlib libShishGL-Core.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libShishGL-RenderSystem.a CMakeFiles/ShishGL-RenderSystem.dir/RenderSystem.cpp.o
+/usr/bin/ranlib libShishGL-RenderSystem.a

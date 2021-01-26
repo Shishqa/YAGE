@@ -23,7 +23,6 @@ bool SessionManager::initSession() {
     SessionPtr() = new SessionManagers();
 
     Session().tool_manager.addTool<Tools::Pencil>();
-    Session().tool_manager.addTool<Tools::Pencil>();
     Session().tool_manager.addTool<Tools::Eraser>();
     Session().tool_manager.addTool<Tools::Rectangle>();
     Session().tool_manager.addTool<Tools::Dropper>();

@@ -1,0 +1,2 @@
+/usr/bin/ar qc libYAGE-ColorUtils.a CMakeFiles/YAGE-ColorUtils.dir/Convert.cpp.o
+/usr/bin/ranlib libYAGE-ColorUtils.a

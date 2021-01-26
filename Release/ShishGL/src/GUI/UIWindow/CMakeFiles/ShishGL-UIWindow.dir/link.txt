@@ -1,0 +1,2 @@
+/usr/bin/ar qc libShishGL-UIWindow.a CMakeFiles/ShishGL-UIWindow.dir/UIWindow.cpp.o
+/usr/bin/ranlib libShishGL-UIWindow.a

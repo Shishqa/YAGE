@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/YAGE/ColorUtils/Convert.hpp
+Color.hpp
+../include/YAGE/ColorUtils/Color.hpp
+
+/home/shishqa/MIPT/2020_3/00_ShishGL/include/ShishGL/Core/Primitives/Color.hpp
+cstdint
+-
+
+/home/shishqa/MIPT/2020_3/02_YAGE/src/ColorUtils/Convert.cpp
+cmath
+-
+algorithm
+-
+Convert.hpp
+/home/shishqa/MIPT/2020_3/02_YAGE/src/ColorUtils/Convert.hpp
+

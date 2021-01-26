@@ -1,0 +1,2 @@
+/usr/bin/ar qc libShishGL-GraphicsPlatform.a CMakeFiles/ShishGL-GraphicsPlatform.dir/Image.cpp.o
+/usr/bin/ranlib libShishGL-GraphicsPlatform.a

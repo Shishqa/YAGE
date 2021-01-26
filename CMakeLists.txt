@@ -5,9 +5,9 @@ project(YAGE
   LANGUAGES CXX
   )
 
-if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+set(DEFAULT_BUILD_TYPE "Release")
 
-  set(DEFAULT_BUILD_TYPE "Release")
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 
   set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -101,5 +101,3 @@ add_subdirectory(src/Panels)
 
 add_subdirectory(../00_ShishGL ShishGL)
 
-add_subdirectory(plugins/UnsharpMask)
-add_subdirectory(plugins/Contrast)

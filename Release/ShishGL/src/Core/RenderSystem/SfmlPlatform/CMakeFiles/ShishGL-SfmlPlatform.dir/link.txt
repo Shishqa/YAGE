@@ -1,0 +1,2 @@
+/usr/bin/ar qc libShishGL-SfmlPlatform.a CMakeFiles/ShishGL-SfmlPlatform.dir/Platform.cpp.o CMakeFiles/ShishGL-SfmlPlatform.dir/Draw.cpp.o CMakeFiles/ShishGL-SfmlPlatform.dir/Events.cpp.o
+/usr/bin/ranlib libShishGL-SfmlPlatform.a

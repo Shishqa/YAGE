@@ -1,3 +1,6 @@
-[submodule "include/PluginAPI"]
-	path = include/PluginAPI
-	url = git@github.com:fckxorg/editor_plugin_api.git
+[submodule "lib/ShishGL"]
+	path = lib/ShishGL
+	url = https://github.com/Shishqa/ShishGL.git
+[submodule "lib/PluginAPI"]
+	path = lib/PluginAPI
+	url = https://github.com/fckxorg/editor_plugin_api.git

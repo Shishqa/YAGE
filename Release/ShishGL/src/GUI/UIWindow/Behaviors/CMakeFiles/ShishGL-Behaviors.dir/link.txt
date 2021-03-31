@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-Behaviors.a CMakeFiles/ShishGL-Behaviors.dir/DefaultBehavior.cpp.o CMakeFiles/ShishGL-Behaviors.dir/Clickable.cpp.o CMakeFiles/ShishGL-Behaviors.dir/Draggable.cpp.o CMakeFiles/ShishGL-Behaviors.dir/Slidable.cpp.o
-/usr/bin/ranlib libShishGL-Behaviors.a

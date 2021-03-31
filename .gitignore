@@ -2,5 +2,8 @@
 cmake-build-debug/
 cmake-build-release/
 
-00_ShishGL
 logs
+
+Release
+Debug
+build

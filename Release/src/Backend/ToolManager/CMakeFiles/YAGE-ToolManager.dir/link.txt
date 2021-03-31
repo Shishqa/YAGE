@@ -1,2 +1,0 @@
-/usr/bin/ar qc libYAGE-ToolManager.a CMakeFiles/YAGE-ToolManager.dir/ToolManager.cpp.o
-/usr/bin/ranlib libYAGE-ToolManager.a

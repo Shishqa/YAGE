@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-Primitives.a CMakeFiles/ShishGL-Primitives.dir/Color.cpp.o CMakeFiles/ShishGL-Primitives.dir/Vector2.cpp.o CMakeFiles/ShishGL-Primitives.dir/Vector3.cpp.o CMakeFiles/ShishGL-Primitives.dir/Time.cpp.o CMakeFiles/ShishGL-Primitives.dir/Frame.cpp.o
-/usr/bin/ranlib libShishGL-Primitives.a

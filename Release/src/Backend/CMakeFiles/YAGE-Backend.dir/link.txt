@@ -1,2 +1,0 @@
-/usr/bin/ar qc libYAGE-Backend.a CMakeFiles/YAGE-Backend.dir/PluginManager.cpp.o CMakeFiles/YAGE-Backend.dir/PluginTool.cpp.o CMakeFiles/YAGE-Backend.dir/SessionManager.cpp.o
-/usr/bin/ranlib libYAGE-Backend.a

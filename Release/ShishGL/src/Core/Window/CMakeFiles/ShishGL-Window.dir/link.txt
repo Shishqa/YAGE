@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-Window.a CMakeFiles/ShishGL-Window.dir/Window.cpp.o CMakeFiles/ShishGL-Window.dir/WindowManager.cpp.o
-/usr/bin/ranlib libShishGL-Window.a

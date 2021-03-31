@@ -1,2 +1,0 @@
-/usr/bin/ar qc libYAGE-ImageManager.a CMakeFiles/YAGE-ImageManager.dir/ImageManager.cpp.o
-/usr/bin/ranlib libYAGE-ImageManager.a

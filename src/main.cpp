@@ -12,8 +12,7 @@ using namespace YAGE;
 
 int main(int argc, char* argv[]) {
 
-    Sh::CoreApplication::init(&argc, argv,
-                              "/home/shishqa/MIPT/2020_3/02_YAGE/assets/");
+    Sh::CoreApplication::init(&argc, argv, "./assets");
 
     SessionManager::initSession();
 

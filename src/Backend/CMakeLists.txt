@@ -25,6 +25,7 @@ target_link_libraries(YAGE-Backend
     YAGE-ImageManager
     YAGE-ToolManager
     YAGE-Tools
+    dl
   )
 
 add_subdirectory(ImageManager)

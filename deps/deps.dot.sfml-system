@@ -1,6 +1,0 @@
-digraph "sfml-system" {
-node [
-  fontsize = "12"
-];
-    "node14" [ label = "sfml-system", shape = doubleoctagon ];
-}

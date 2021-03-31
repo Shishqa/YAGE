@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-GUI.a CMakeFiles/ShishGL-GUI.dir/UICanvas.cpp.o CMakeFiles/ShishGL-GUI.dir/UIFrame.cpp.o CMakeFiles/ShishGL-GUI.dir/UITextInput.cpp.o CMakeFiles/ShishGL-GUI.dir/UIDialog.cpp.o
-/usr/bin/ranlib libShishGL-GUI.a

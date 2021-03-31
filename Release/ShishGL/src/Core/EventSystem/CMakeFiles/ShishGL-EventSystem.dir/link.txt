@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-EventSystem.a CMakeFiles/ShishGL-EventSystem.dir/Event.cpp.o CMakeFiles/ShishGL-EventSystem.dir/EventManager.cpp.o CMakeFiles/ShishGL-EventSystem.dir/Listener.cpp.o CMakeFiles/ShishGL-EventSystem.dir/SubscriptionManager.cpp.o CMakeFiles/ShishGL-EventSystem.dir/EventSystem.cpp.o
-/usr/bin/ranlib libShishGL-EventSystem.a

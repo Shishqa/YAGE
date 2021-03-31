@@ -1,6 +1,0 @@
-digraph "ShishGL-Primitives" {
-node [
-  fontsize = "12"
-];
-    "node5" [ label = "ShishGL-Primitives", shape = octagon ];
-}

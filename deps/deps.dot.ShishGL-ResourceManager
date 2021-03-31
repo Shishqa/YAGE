@@ -1,6 +1,0 @@
-digraph "ShishGL-ResourceManager" {
-node [
-  fontsize = "12"
-];
-    "node10" [ label = "ShishGL-ResourceManager", shape = octagon ];
-}

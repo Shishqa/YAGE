@@ -1,2 +1,0 @@
-/usr/bin/ar qc libYAGE-Tools.a CMakeFiles/YAGE-Tools.dir/Pencil.cpp.o
-/usr/bin/ranlib libYAGE-Tools.a

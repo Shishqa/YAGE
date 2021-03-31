@@ -1,2 +1,0 @@
-/usr/bin/ar qc libYAGE-Panels.a CMakeFiles/YAGE-Panels.dir/MainPanels.cpp.o CMakeFiles/YAGE-Panels.dir/Canvas.cpp.o CMakeFiles/YAGE-Panels.dir/LayerList.cpp.o CMakeFiles/YAGE-Panels.dir/ToolList.cpp.o CMakeFiles/YAGE-Panels.dir/PropertyList.cpp.o
-/usr/bin/ranlib libYAGE-Panels.a

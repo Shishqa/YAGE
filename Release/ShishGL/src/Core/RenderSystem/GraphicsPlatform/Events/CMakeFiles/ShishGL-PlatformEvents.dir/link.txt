@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-PlatformEvents.a CMakeFiles/ShishGL-PlatformEvents.dir/PlatformListener.cpp.o CMakeFiles/ShishGL-PlatformEvents.dir/KeyboardEvent.cpp.o CMakeFiles/ShishGL-PlatformEvents.dir/MouseEvent.cpp.o CMakeFiles/ShishGL-PlatformEvents.dir/TimerEvent.cpp.o
-/usr/bin/ranlib libShishGL-PlatformEvents.a

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-LogSystem.a CMakeFiles/ShishGL-LogSystem.dir/LogSystem.cpp.o
-/usr/bin/ranlib libShishGL-LogSystem.a

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-DebugUtilities.a CMakeFiles/ShishGL-DebugUtilities.dir/FpsLabel.cpp.o
-/usr/bin/ranlib libShishGL-DebugUtilities.a

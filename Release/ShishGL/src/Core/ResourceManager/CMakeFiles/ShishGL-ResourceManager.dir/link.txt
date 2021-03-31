@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-ResourceManager.a CMakeFiles/ShishGL-ResourceManager.dir/ResourceManager.cpp.o
-/usr/bin/ranlib libShishGL-ResourceManager.a

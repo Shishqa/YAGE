@@ -1,8 +1,0 @@
-digraph "YAGE-Plugins" {
-node [
-  fontsize = "12"
-];
-    "node29" [ label = "YAGE-Plugins", shape = octagon ];
-    "node30" [ label = "yage", shape = egg ];
-    "node30" -> "node29" [ style = dotted ] // yage -> YAGE-Plugins
-}

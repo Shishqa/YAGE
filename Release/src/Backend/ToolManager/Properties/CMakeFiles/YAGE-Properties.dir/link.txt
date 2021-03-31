@@ -1,2 +1,0 @@
-/usr/bin/ar qc libYAGE-Properties.a CMakeFiles/YAGE-Properties.dir/Property.cpp.o CMakeFiles/YAGE-Properties.dir/Stroke.cpp.o CMakeFiles/YAGE-Properties.dir/ColorPicker.cpp.o CMakeFiles/YAGE-Properties.dir/DefaultProperties.cpp.o
-/usr/bin/ranlib libYAGE-Properties.a

@@ -1,2 +1,0 @@
-/usr/bin/ar qc libShishGL-Shapes.a CMakeFiles/ShishGL-Shapes.dir/RectangleShape.cpp.o CMakeFiles/ShishGL-Shapes.dir/CircleShape.cpp.o
-/usr/bin/ranlib libShishGL-Shapes.a

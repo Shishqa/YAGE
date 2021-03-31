@@ -61,12 +61,12 @@ add_library(PluginAPI INTERFACE)
 
 target_include_directories(PluginAPI
   INTERFACE
-    ${YAGE_SOURCE_DIR}/include/PluginAPI/api
+    ${YAGE_SOURCE_DIR}/lib/PluginAPI/api
   )
 
 target_sources(PluginAPI
   INTERFACE
-    ${YAGE_SOURCE_DIR}/include/PluginAPI/api/api.hpp
+    ${YAGE_SOURCE_DIR}/lib/PluginAPI/api/api.hpp
   )
 
 set(INCROOT ${YAGE_SOURCE_DIR}/include/YAGE)
@@ -99,5 +99,5 @@ add_subdirectory(src/Backend)
 add_subdirectory(src/ColorUtils)
 add_subdirectory(src/Panels)
 
-add_subdirectory(../00_ShishGL ShishGL)
+add_subdirectory(lib/ShishGL ShishGL)
 
